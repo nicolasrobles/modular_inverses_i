@@ -1,0 +1,4657 @@
+{
+  "schema_version": 1,
+  "metadata": {
+    "title": "Discrepancy and local statistics of modular inverses",
+    "authors": [
+      "Debmalya Basak",
+      "Sneha Chaubey",
+      "Nicolas Robles",
+      "Igor E. Shparlinski",
+      "Alexandru Zaharescu"
+    ],
+    "source_filename": "modular_inverse_discrepancy_v39.tex",
+    "source_upload_name": "modular_inverse_discrepancy_v39(1).tex",
+    "source_sha256": "03bb313d26bb491a742178ce0051f646c0af19b12af4ce3662577b481b93e2db",
+    "source_version": "v39",
+    "source_included": false,
+    "formalization_status": "not_started",
+    "updated": "2026-11-25",
+    "repository_url": "https://github.com/nicolasrobles/modular_inverses_i",
+    "model_repository_url": "https://github.com/nicolasrobles/quaternary-quadratic-forms",
+    "model_commit": "b0465efa32fae600039f120094d10f7e533f8cd3",
+    "counts": {
+      "theorem": 6,
+      "corollary": 10,
+      "proposition": 4,
+      "lemma": 6,
+      "remark": 5
+    }
+  },
+  "conventions": {
+    "direction": "Prerequisite to consequence.",
+    "proof": "A mathematical statement, identity, estimate or calculation used in the written proof.",
+    "method": "Reuse of an argument or explicit method attribution, distinct from use of the source result's numerical conclusion.",
+    "literature": "A trusted external result or definition at the locator recorded in the inventory.",
+    "source_locators": "One-based lines in the identified v39 source; statement PDF pages are taken from its compiled auxiliary file.",
+    "synthetic_ids": "The prefixes step:, external: and ov: identify repository records; they are not new manuscript labels or theorem numbers.",
+    "scope": "Numbered statements and substantive supporting steps. Section 3 comparison calculations and Section 6 discussion remain separate from the main proof graph. Ambient definitions, arithmetic and analysis are described where used rather than expanded into a formal axiomatic foundation.",
+    "literature_policy": "Cited literature results are treated as trusted inputs and are not reproved here. Their statements, hypotheses, parameter ranges, and normalizations must match each application. Explicit method credit is distinguished from an assumed external conclusion.",
+    "status_colours": "Purple: trusted references. Green: certified internal entries. Yellow: pending certification. All internal entries are pending because formalization has not started; this status is separate from the mathematical audit."
+  },
+  "sections": {
+    "1": "Introduction",
+    "2": "Preliminary lemmas",
+    "3": "Fourier analysis of the point set",
+    "4": "Discrepancy of convex and well-shaped sets",
+    "5": "Local statistics"
+  },
+  "branches": {
+    "arithmetic": "Arithmetic estimates and normalization",
+    "fourier": "Fourier analysis and smooth brackets",
+    "geometry": "Convex geometry and translation estimates",
+    "identities": "Counting, difference and variance identities",
+    "discrepancy": "Discrepancy and boundary neighborhoods",
+    "local_statistics": "Differences and local variance",
+    "distance": "Distance moments"
+  },
+  "nodes": [
+    {
+      "id": "thm:perimeter",
+      "kind": "theorem",
+      "number": "1.1",
+      "title": "Convex discrepancy with perimeter dependence",
+      "short_title": "Perimeter discrepancy",
+      "summary": "For convex sets represented inside a translated unit square, bounds discrepancy by $X^{\\varepsilon}(X^{-1}+P^{2/3}X^{-2/3})$, uniformly in the position and the set, for $X\\ge2$.",
+      "section": "1",
+      "branch": "discrepancy",
+      "origin": "Proved in v39",
+      "tex_label": "thm:perimeter",
+      "source": {
+        "statement_lines": [
+          196,
+          201
+        ],
+        "proof_lines": [
+          771,
+          791
+        ],
+        "statement_page": 3
+      },
+      "references": [],
+      "notes": [
+        "Includes degenerate convex sets, with the stated continuous perimeter convention and pointwise boundary membership.",
+        "The proof chooses different smoothing scales according as $P\\ge X^{-1/2}$ or $P<X^{-1/2}$; the latter includes $P=0$.",
+        "The term $X^{-1}$ is retained. The coordinate-separation bound later gives more precise information for very short perimeters."
+      ],
+      "certification_status": "pending"
+    },
+    {
+      "id": "cor:isotropic",
+      "kind": "corollary",
+      "number": "1.2",
+      "title": "Isotropic discrepancy bound",
+      "short_title": "Isotropic discrepancy",
+      "summary": "Taking the supremum over the manuscript's class of convex sets gives discrepancy $\\ll_{\\varepsilon}X^{-2/3+\\varepsilon}$.",
+      "section": "1",
+      "branch": "discrepancy",
+      "origin": "Proved in v39",
+      "tex_label": "cor:isotropic",
+      "source": {
+        "statement_lines": [
+          203,
+          208
+        ],
+        "proof_lines": [
+          793,
+          795
+        ],
+        "statement_page": 3
+      },
+      "references": [],
+      "notes": [
+        "Uses the uniform perimeter bound $P\\le4$, as established in the proof of Lemma 2.7."
+      ],
+      "certification_status": "pending"
+    },
+    {
+      "id": "cor:shrinking",
+      "kind": "corollary",
+      "number": "1.3",
+      "title": "Relative counting for shrinking convex shapes",
+      "short_title": "Shrinking convex shapes",
+      "summary": "For a fixed convex body of positive area and $0<\\kappa<1/2$, obtains relative error $O_{K_0,\\kappa}(X^{-\\kappa})$ at dilations $t\\ge X^{-1/2+\\kappa}$ that fit inside a translated unit square, uniformly over translations and rotations.",
+      "section": "1",
+      "branch": "discrepancy",
+      "origin": "Proved in v39",
+      "tex_label": "cor:shrinking",
+      "source": {
+        "statement_lines": [
+          218,
+          223
+        ],
+        "proof_lines": [
+          797,
+          803
+        ],
+        "statement_page": 4
+      },
+      "references": [],
+      "notes": [
+        "Uses area scaling by $t^2$ and perimeter scaling by $t$, then divides the absolute discrepancy bound by the area."
+      ],
+      "certification_status": "pending"
+    },
+    {
+      "id": "thm:boundary",
+      "kind": "theorem",
+      "number": "1.4",
+      "title": "Discrepancy from topological boundary neighborhoods",
+      "short_title": "Boundary-neighborhood discrepancy",
+      "summary": "If $b_E(s)\\le Bs^{\\alpha}$ for $0<s\\le1$, $0<\\alpha\\le1$ and $B\\ge1$, gives $D_X(E)\\ll_{\\varepsilon}B^{2/(2+\\alpha)}X^{-2\\alpha/(2+\\alpha)+\\varepsilon}$ for $X\\ge2$.",
+      "section": "1",
+      "branch": "discrepancy",
+      "origin": "Proved in v39",
+      "tex_label": "thm:boundary",
+      "source": {
+        "statement_lines": [
+          237,
+          242
+        ],
+        "proof_lines": [
+          872,
+          912
+        ],
+        "statement_page": 4
+      },
+      "references": [],
+      "notes": [
+        "The implied constant depends only on epsilon, uniformly in alpha, B and the measurable set E.",
+        "Uses the topological boundary and pointwise brackets, not an almost-everywhere representative.",
+        "It redoes the smoothing argument with a different boundary hypothesis. It is not a numerical consequence of Theorem 1.1 or Proposition 4.2.",
+        "The proof handles $B\\ge X^{\\alpha}$ trivially; otherwise it takes $\\delta=(BX^2)^{-1/(2+\\alpha)}/8$ and absorbs the remaining factors."
+      ],
+      "certification_status": "pending"
+    },
+    {
+      "id": "thm:differences",
+      "kind": "theorem",
+      "number": "1.5",
+      "title": "Distribution of ordered differences",
+      "short_title": "Difference counts",
+      "summary": "The difference measure, including diagonal pairs, has discrepancy $\\ll_\\varepsilon X^\\varepsilon(PX^{-1}+X^{-2})$ for a convex set of perimeter $P$ in a translated unit square. For a product of arcs of area $V$, the bound is $\\ll_\\varepsilon X^\\varepsilon(X^{-2}+V^{2/3}X^{-5/3})$, independently of its aspect ratio.",
+      "section": "1",
+      "branch": "local_statistics",
+      "origin": "Proved in v39",
+      "tex_label": "thm:differences",
+      "source": {
+        "statement_lines": [
+          252,
+          261
+        ],
+        "proof_lines": [
+          [
+            956,
+            979
+          ],
+          [
+            997,
+            1031
+          ]
+        ],
+        "statement_page": 4
+      },
+      "references": [],
+      "notes": [
+        "The convex and product-of-arcs clauses have separate proofs.",
+        "The distinct-pair versions are stated after the theorem and follow by the separate diagonal-removal identity (5.4).",
+        "The box bound uses the rectangular frequency moment directly; the convex bound uses its squared shell consequence."
+      ],
+      "certification_status": "pending"
+    },
+    {
+      "id": "thm:variance",
+      "kind": "theorem",
+      "number": "1.6",
+      "title": "Variance of counts in translates",
+      "short_title": "Local variance",
+      "summary": "The variance of the normalized count is $\\ll_\\varepsilon X^\\varepsilon(P^2X^{-2}+A^{4/3}P^{2/3}X^{-5/3})$ for a convex set with area $A$ and perimeter $P$. Products of arcs satisfy $\\ll_\\varepsilon X^\\varepsilon(VX^{-2}+V^{5/3}X^{-5/3})$, and discs satisfy $\\ll_\\varepsilon X^\\varepsilon(r^2X^{-2}+r^{10/3}X^{-5/3})$. If every translate contains at most one point, the variance equals $|E|/N_X-|E|^2$.",
+      "section": "1",
+      "branch": "local_statistics",
+      "origin": "Proved in v39",
+      "tex_label": "thm:variance",
+      "source": {
+        "statement_lines": [
+          271,
+          289
+        ],
+        "proof_lines": [
+          1087,
+          1117
+        ],
+        "statement_page": 5
+      },
+      "references": [],
+      "notes": [
+        "The disc clause is obtained from the already proved convex clause; the component graph records that use without a self-edge on this theorem.",
+        "The exact identity is proved in Lemma 5.3 before the theorem's proof, despite its earlier appearance as equation (1.15).",
+        "The variance bounds do not require smoothing. The rectangle proof reuses a frequency-block method from the difference proof, not the numerical difference bound."
+      ],
+      "certification_status": "pending"
+    },
+    {
+      "id": "thm:distance",
+      "kind": "theorem",
+      "number": "1.7",
+      "title": "Moments of the distance to the point set",
+      "short_title": "Distance moments",
+      "summary": "For every fixed $s>0$, the $s$-th distance moment lies between constant multiples of $X^{-\\vartheta(s)}$ and $X^{-\\vartheta(s)+\\varepsilon}$, where $\\vartheta(s)=\\min\\{s,1+s/2\\}$. Thus the exponents change at $s=2$.",
+      "section": "1",
+      "branch": "distance",
+      "origin": "Proved in v39",
+      "tex_label": "thm:distance",
+      "source": {
+        "statement_lines": [
+          299,
+          305
+        ],
+        "proof_lines": [
+          1169,
+          1198
+        ],
+        "statement_page": 5
+      },
+      "references": [],
+      "notes": [
+        "The upper bound depends on both Theorem 1.6 and Corollary 1.3 through the distance tail and a uniform cutoff.",
+        "The lower bounds use a finite-point packing argument and the explicitly empty rectangle (1.6).",
+        "At $s=2$, v39 determines the power of $X$ but no precise subpower factor or leading constant."
+      ],
+      "certification_status": "pending"
+    },
+    {
+      "id": "thm:brs-input",
+      "kind": "theorem",
+      "number": "2.1",
+      "title": "The BRS frequency second moment",
+      "short_title": "BRS second moment",
+      "summary": "For all real $N,X\\ge1$ and $\\eta>0$, $\\sum_{N\\le|r|<2N}|A_X(r,1)|^2\\ll_\\eta(NX)^\\eta(NX^2+N^{1/3}X^{7/3})$. Both signs are included, with no relation between $N$ and $X$.",
+      "section": "2",
+      "branch": "arithmetic",
+      "origin": "Cited input",
+      "tex_label": "thm:brs-input",
+      "source": {
+        "statement_lines": [
+          376,
+          381
+        ],
+        "proof_lines": null,
+        "statement_page": 8
+      },
+      "references": [
+        {
+          "bibkey": "BRS",
+          "locator": "Theorem 1.3",
+          "role": "Trusted cited input"
+        },
+        {
+          "bibkey": "BRS",
+          "locator": "Section 2.1",
+          "role": "Convention converting the source's small-power notation to a bound for every positive exponent"
+        }
+      ],
+      "notes": [
+        "The paragraph at line 383 explains the exponent convention and bounded parameter range. This is a fixed-height second moment; it is not the height-averaged theorem of the companion paper.",
+        "Equation (1.2) in the introduction repeats this result and is not a separate predecessor."
+      ],
+      "certification_status": "pending"
+    },
+    {
+      "id": "cor:brs-cumulative",
+      "kind": "corollary",
+      "number": "2.2",
+      "title": "Cumulative frequency second moment",
+      "short_title": "Cumulative frequency range",
+      "summary": "For real $R,Y\\ge1$, the sum over $1\\le|r|\\le R$ is $\\ll_\\eta(RY)^\\eta(RY^2+R^{1/3}Y^{7/3})$.",
+      "section": "2",
+      "branch": "arithmetic",
+      "origin": "Derived in v39",
+      "tex_label": "cor:brs-cumulative",
+      "source": {
+        "statement_lines": [
+          385,
+          390
+        ],
+        "proof_lines": [
+          391,
+          397
+        ],
+        "statement_page": 8
+      },
+      "references": [],
+      "notes": [
+        "The upper endpoint is included even when R is a power of two."
+      ],
+      "certification_status": "pending"
+    },
+    {
+      "id": "prop:rectangular",
+      "kind": "proposition",
+      "number": "2.3",
+      "title": "Second moment over a frequency rectangle",
+      "short_title": "Rectangular second moment",
+      "summary": "For $M,N,X\\ge1$, $\\sum_{|m|\\le M,\\ |n|\\le N,\\ (m,n)\\ne(0,0)}|A_X(m,n)|^2\\ll_\\varepsilon(MNX)^\\varepsilon\\{MNX^2+(MN)^{1/3}X^{7/3}\\}$. The axes and all signs are included.",
+      "section": "2",
+      "branch": "arithmetic",
+      "origin": "Proved in v39",
+      "tex_label": "prop:rectangular",
+      "source": {
+        "statement_lines": [
+          410,
+          415
+        ],
+        "proof_lines": [
+          416,
+          450
+        ],
+        "statement_page": 8
+      },
+      "references": [
+        {
+          "bibkey": "IK",
+          "locator": "Equation (1.81)",
+          "role": "Divisor bound used in the reduction"
+        },
+        {
+          "bibkey": "IK",
+          "locator": "Equation (3.2)",
+          "role": "Ramanujan-sum identity on the axes"
+        }
+      ],
+      "notes": [
+        "The divisor restriction d<=min(M,N,X) ensures both parameters in Corollary 2.2 are at least one.",
+        "The introductory equation (1.17) is a restatement, not a prerequisite."
+      ],
+      "certification_status": "pending"
+    },
+    {
+      "id": "cor:shell",
+      "kind": "corollary",
+      "number": "2.4",
+      "title": "Normalized moments on frequency shells",
+      "short_title": "Normalized shell moments",
+      "summary": "For $X\\ge2$ and $H\\ge1$, the shell $\\ell^2$ norm is $\\ll_\\eta(HX)^\\eta(X^{-1}H+X^{-5/6}H^{1/3})$. Its square is $\\ll_\\eta(HX)^\\eta(X^{-2}H^2+X^{-5/3}H^{2/3})$, and $|a_X(k)|^2\\le1$.",
+      "section": "2",
+      "branch": "arithmetic",
+      "origin": "Derived in v39",
+      "tex_label": "cor:shell",
+      "source": {
+        "statement_lines": [
+          454,
+          464
+        ],
+        "proof_lines": [
+          465,
+          471
+        ],
+        "statement_page": 9
+      },
+      "references": [],
+      "notes": [
+        "The statement uses N_X>>X^2 for normalization. The arbitrary exponent is renamed after squaring.",
+        "The introductory equation (1.18) repeats the shell estimate."
+      ],
+      "certification_status": "pending"
+    },
+    {
+      "id": "lem:translation",
+      "kind": "lemma",
+      "number": "2.5",
+      "title": "Fourier tail from an L2 translation estimate",
+      "short_title": "Translation to Fourier tails",
+      "summary": "If $g\\in L^2(\\mathbb T^2)$ satisfies $\\|g(\\cdot+h)-g\\|_2^2\\le\\Lambda|h|_2^\\alpha$ for $|h|_2\\le1$, with $0<\\alpha\\le1$ and $\\Lambda\\ge0$, then $\\sum_{\\|k\\|_\\infty\\ge H}|\\widehat g(k)|^2\\le 2^{-\\alpha/2}\\Lambda H^{-\\alpha}/[2(1-1/\\pi)]$ for every real $H\\ge1$.",
+      "section": "2",
+      "branch": "fourier",
+      "origin": "Proved in v39",
+      "tex_label": "lem:translation",
+      "source": {
+        "statement_lines": [
+          481,
+          491
+        ],
+        "proof_lines": [
+          492,
+          507
+        ],
+        "statement_page": 10
+      },
+      "references": [
+        {
+          "bibkey": "Grafakos",
+          "locator": "Section 3.2.2",
+          "role": "Parseval identity stated at line 477"
+        }
+      ],
+      "notes": [
+        "The proof averages the translation multiplier on a square of side 1/H. It is independent of the arithmetic moment estimates."
+      ],
+      "certification_status": "pending"
+    },
+    {
+      "id": "lem:brackets",
+      "kind": "lemma",
+      "number": "2.6",
+      "title": "Pointwise smooth brackets for measurable sets",
+      "short_title": "Pointwise brackets",
+      "summary": "For measurable $E\\subset\\mathbb T^2$ and $0<\\delta\\le1/8$, constructs smooth real $f_-\\le\\mathbf1_E\\le f_+$ at every point, with values in $[0,1]$. The integral error is at most $b_E(3\\delta)$; Fourier coefficients and shell norms gain $(1+\\delta H)^{-L}$ with boundary errors $b_E(3\\delta)$ and $b_E(3\\delta)^{1/2}$ respectively.",
+      "section": "2",
+      "branch": "fourier",
+      "origin": "Proved in v39",
+      "tex_label": "lem:brackets",
+      "source": {
+        "statement_lines": [
+          530,
+          545
+        ],
+        "proof_lines": [
+          546,
+          570
+        ],
+        "statement_page": 11
+      },
+      "references": [
+        {
+          "bibkey": "Grafakos",
+          "locator": "Section 3.1.2",
+          "role": "Fourier transform of convolution, recalled at line 477"
+        },
+        {
+          "bibkey": "Grafakos",
+          "locator": "Section 3.2.2",
+          "role": "Parseval in the shell-energy estimate"
+        }
+      ],
+      "notes": [
+        "Uses the mollifier and basic Fourier facts from subsection 2.3, not the numerical conclusion of Lemma 2.5.",
+        "The mention of the counting identity at line 528 motivates the construction; Proposition 3.1 is not used to prove these brackets."
+      ],
+      "certification_status": "pending"
+    },
+    {
+      "id": "lem:convex-geometry",
+      "kind": "lemma",
+      "number": "2.7",
+      "title": "Boundary, translation and Fourier bounds for convex sets",
+      "short_title": "Convex geometry and Fourier decay",
+      "summary": "For convex $\\Omega\\subset u+[0,1)^2$, $E=\\pi\\Omega$, perimeter $P$ and area $A$, proves $b_E(s)\\le4\\pi(Ps+s^2)$, $\\|\\mathbf1_E(\\cdot+h)-\\mathbf1_E\\|_2^2\\le P|h|_2$, Fourier tail $\\ll P/T$, and $|\\widehat{\\mathbf1_E}(k)|\\le\\min(A,P/(4|k|_2))$ for $k\\ne0$. Degenerate convex sets are included.",
+      "section": "2",
+      "branch": "geometry",
+      "origin": "Proved in v39",
+      "tex_label": "lem:convex-geometry",
+      "source": {
+        "statement_lines": [
+          578,
+          587
+        ],
+        "proof_lines": [
+          588,
+          615
+        ],
+        "statement_page": 12
+      },
+      "references": [],
+      "notes": [
+        "The Fourier-tail component uses Lemma 2.5 after the translation component has been proved; there is no self-dependency of the whole lemma.",
+        "Here |k|_2 is Euclidean length of the vector k, not the absolute value of its second coordinate."
+      ],
+      "certification_status": "pending"
+    },
+    {
+      "id": "cor:convex-brackets",
+      "kind": "corollary",
+      "number": "2.8",
+      "title": "Fourier estimates for convex brackets",
+      "short_title": "Convex bracket bounds",
+      "summary": "For $0<\\delta\\le1/8$ and $H\\ge1$, with $b=P\\delta+\\delta^2$, the brackets have integral error $\\ll b$, shell norm $\\ll_L(1+\\delta H)^{-L}(P^{1/2}H^{-1/2}+b^{1/2})$, and coefficient bound $\\ll_L(1+\\delta H)^{-L}(P/H+b)$.",
+      "section": "2",
+      "branch": "fourier",
+      "origin": "Derived in v39",
+      "tex_label": "cor:convex-brackets",
+      "source": {
+        "statement_lines": [
+          619,
+          626
+        ],
+        "proof_lines": [
+          627,
+          629
+        ],
+        "statement_page": 13
+      },
+      "references": [],
+      "notes": [
+        "Combines the generic brackets with the tube, Fourier-tail and pointwise components of Lemma 2.7."
+      ],
+      "certification_status": "pending"
+    },
+    {
+      "id": "rem:tube-to-translation",
+      "kind": "remark",
+      "number": "2.9",
+      "title": "A boundary-tube bound implies a translation bound",
+      "short_title": "Tube bound to translation",
+      "summary": "For any measurable $E$ with $b_E(s)\\le C_0(Ps+s^2)$ for $0<s\\le1$, subdivision of a translation gives $\\|\\mathbf1_E(\\cdot+h)-\\mathbf1_E\\|_1\\le C_0P|h|_2$ for $|h|_2<1$. The separate convex slicing argument supplies the sharper constant used in (2.20).",
+      "section": "2",
+      "branch": "geometry",
+      "origin": "In-text deduction",
+      "tex_label": "rem:tube-to-translation",
+      "source": {
+        "statement_lines": [
+          631,
+          633
+        ],
+        "proof_lines": [
+          632,
+          632
+        ],
+        "statement_page": 14
+      },
+      "references": [],
+      "notes": [
+        "Reuses the boundary-crossing argument from the proof of Lemma 2.6.",
+        "The references to Theorem 1.1 and to the convex bounds describe applications and comparisons; those conclusions are not prerequisites for the generic implication."
+      ],
+      "certification_status": "pending"
+    },
+    {
+      "id": "prop:identities",
+      "kind": "proposition",
+      "number": "3.1",
+      "title": "Fourier identities for counting, differences and variance",
+      "short_title": "Three Fourier identities",
+      "summary": "For $X\\ge2$, smooth counting error is $\\sum_{k\\ne0}\\widehat f(k)a_X(k)$, smooth difference-distribution error is $\\sum_{k\\ne0}\\widehat f(k)|a_X(k)|^2$, and for every measurable $E$ the translation variance is $\\sum_{k\\ne0}|\\widehat{\\mathbf1_E}(k)|^2|a_X(k)|^2$.",
+      "section": "3",
+      "branch": "identities",
+      "origin": "Proved in v39",
+      "tex_label": "prop:identities",
+      "source": {
+        "statement_lines": [
+          641,
+          660
+        ],
+        "proof_lines": [
+          661,
+          684
+        ],
+        "statement_page": 14
+      },
+      "references": [
+        {
+          "bibkey": "Grafakos",
+          "locator": "Sections 3.3.2 and 3.3.3",
+          "role": "Smooth Fourier inversion recalled at line 477"
+        },
+        {
+          "bibkey": "Grafakos",
+          "locator": "Section 3.2.2",
+          "role": "Parseval for the measurable variance identity"
+        }
+      ],
+      "notes": [
+        "The identities need no BRS moment estimate, no shell bound, and no translation-to-tail lemma.",
+        "The introductory equations (1.19) and (1.20) announce these identities and do not constitute proof inputs.",
+        "Parts (i)-(iii) are recorded separately as auxiliary equation nodes for downstream use."
+      ],
+      "certification_status": "pending"
+    },
+    {
+      "id": "rem:overlap",
+      "kind": "remark",
+      "number": "3.2",
+      "title": "Variance as an average of the overlap function",
+      "short_title": "Overlap identity",
+      "summary": "For $C_E(v)=\\int\\mathbf1_E(x)\\mathbf1_E(x+v)\\,dx$, direct expansion gives $\\mathcal V_X(E)=\\int C_E\\,d\\nu_X-|E|^2$. The variance theorem uses the Fourier variance identity directly, independently of the difference-distribution theorem.",
+      "section": "3",
+      "branch": "identities",
+      "origin": "In-text deduction",
+      "tex_label": "rem:overlap",
+      "source": {
+        "statement_lines": [
+          688,
+          690
+        ],
+        "proof_lines": [
+          689,
+          689
+        ],
+        "statement_page": 15
+      },
+      "references": [],
+      "notes": [
+        "The equality is obtained by expanding the defining finite sum and changing variables; it does not require the conclusions of Theorems 1.5 or 1.6 or Proposition 3.1."
+      ],
+      "certification_status": "pending"
+    },
+    {
+      "id": "lem:dyadic",
+      "kind": "lemma",
+      "number": "4.1",
+      "title": "Dyadic sums against smoothing decay",
+      "short_title": "Dyadic summation",
+      "summary": "Controls the dyadic sum of $H^s(1+\\delta H)^{-L}$ by $\\delta^{-s}$ for $s>0$ and by a constant for $s<0$, with $L>\\max(s,0)$ and $0<\\delta\\le1$.",
+      "section": "4",
+      "branch": "discrepancy",
+      "origin": "Proved in v39",
+      "tex_label": "lem:dyadic",
+      "source": {
+        "statement_lines": [
+          724,
+          729
+        ],
+        "proof_lines": [
+          730,
+          732
+        ],
+        "statement_page": 16
+      },
+      "references": [],
+      "notes": [
+        "The statement excludes $s=0$.",
+        "Its proof gives explicit geometric-series constants and uniformity for s in compact subsets of $(0,L)$; the boundary proof separately treats the exponent that can cross zero."
+      ],
+      "certification_status": "pending"
+    },
+    {
+      "id": "prop:smoothing",
+      "kind": "proposition",
+      "number": "4.2",
+      "title": "Smoothing inequality for convex discrepancy",
+      "short_title": "Convex smoothing bound",
+      "summary": "At any $0<\\delta\\le1/8$, controls convex discrepancy by the boundary error $b=P\\delta+\\delta^2$ and the Fourier contributions with scales $X^{-1}\\delta^{-1/2}$ and $X^{-5/6}$.",
+      "section": "4",
+      "branch": "discrepancy",
+      "origin": "Proved in v39",
+      "tex_label": "prop:smoothing",
+      "source": {
+        "statement_lines": [
+          734,
+          739
+        ],
+        "proof_lines": [
+          740,
+          765
+        ],
+        "statement_page": 16
+      },
+      "references": [],
+      "notes": [
+        "Pairs the geometric shell norm from Corollary 2.8 with the arithmetic shell norm from Corollary 2.4.",
+        "The pointwise-bracket reduction is required because the counting measure is atomic.",
+        "The displayed bound holds for every eta>0; its proof first treats $0<\\eta\\le1/12$."
+      ],
+      "certification_status": "pending"
+    },
+    {
+      "id": "prop:coordinate-separation",
+      "kind": "proposition",
+      "number": "4.3",
+      "title": "Elementary discrepancy from coordinate separation",
+      "short_title": "Coordinate-separation bound",
+      "summary": "For convex sets in a translated unit square, gives the absolute-constant bound $D_X(\\pi\\Omega)\\ll X^{-2}+\\min(w_1,w_2)\\ll X^{-2}+P(\\Omega)$ for $X\\ge2$.",
+      "section": "4",
+      "branch": "discrepancy",
+      "origin": "Proved in v39",
+      "tex_label": "prop:coordinate-separation",
+      "source": {
+        "statement_lines": [
+          809,
+          814
+        ],
+        "proof_lines": [
+          815,
+          825
+        ],
+        "statement_page": 18
+      },
+      "references": [],
+      "notes": [
+        "The counting argument is elementary; no second moment, smoothing estimate, or Theorem 1.1 is used.",
+        "Uses injectivity and denominator separation in each coordinate, the cardinality lower bound, and the direct geometric inequality $2w_j\\le P$.",
+        "Works with lifts in the chosen square, including points whose coordinates acquire integer shifts."
+      ],
+      "certification_status": "pending"
+    },
+    {
+      "id": "cor:small-perimeter-sharp",
+      "kind": "corollary",
+      "number": "4.4",
+      "title": "Sharp discrepancy order for very small perimeters",
+      "short_title": "Sharp small-perimeter order",
+      "summary": "For real $X\\ge4$ and $0\\le p\\le X^{-1}$, the largest discrepancy among convex sets of perimeter at most p has order $p+X^{-2}$, with absolute constants.",
+      "section": "4",
+      "branch": "discrepancy",
+      "origin": "Proved in v39",
+      "tex_label": "cor:small-perimeter-sharp",
+      "source": {
+        "statement_lines": [
+          833,
+          843
+        ],
+        "proof_lines": [
+          844,
+          858
+        ],
+        "statement_page": 18
+      },
+      "references": [],
+      "notes": [
+        "The supremum includes segments and points; $p=0$ is explicitly covered.",
+        "The lower example is a diagonal segment containing reciprocal points. The real-height case follows by replacing X by floor(X).",
+        "Uses Proposition 4.3 for the upper bound, not Theorem 1.1."
+      ],
+      "certification_status": "pending"
+    },
+    {
+      "id": "rem:positive-area",
+      "kind": "remark",
+      "number": "4.5",
+      "title": "A positive-area obstruction to deleting the baseline term",
+      "short_title": "Positive-area obstruction",
+      "summary": "A thin rectangle containing many diagonal reciprocal points has discrepancy $\\gg X^{-1}$ while its perimeter contribution is $O(X^{-4/3})$, so the baseline term in Theorem 1.1 remains necessary even for positive-area convex bodies.",
+      "section": "4",
+      "branch": "discrepancy",
+      "origin": "Proved or explained in the remark",
+      "tex_label": "rem:positive-area",
+      "source": {
+        "statement_lines": [
+          860,
+          866
+        ],
+        "proof_lines": [
+          860,
+          866
+        ],
+        "statement_page": 19
+      },
+      "references": [],
+      "notes": [
+        "The construction is for integer X and gives the asserted discrepancy lower bound for sufficiently large X.",
+        "This is a direct example using the elementary cardinality upper bound. It is not obtained by applying Theorem 1.1 or Corollary 4.4."
+      ],
+      "certification_status": "pending"
+    },
+    {
+      "id": "cor:well-shaped",
+      "kind": "corollary",
+      "number": "4.6",
+      "title": "Discrepancy of well-shaped sets",
+      "short_title": "Well-shaped sets",
+      "summary": "For the Euclidean definition of gamma-well-shapedness inside $[0,1)^2$, gives discrepancy $\\ll_{\\varepsilon}(1+\\gamma)^{2/3}X^{-2/3+\\varepsilon}$, uniformly for $\\gamma\\ge0$ and $X\\ge2$.",
+      "section": "4",
+      "branch": "discrepancy",
+      "origin": "Proved in v39",
+      "tex_label": "cor:well-shaped",
+      "source": {
+        "statement_lines": [
+          920,
+          925
+        ],
+        "proof_lines": [
+          926,
+          928
+        ],
+        "statement_page": 20
+      },
+      "references": [
+        {
+          "bibkey": "BRS",
+          "locator": "Section 3.1",
+          "role": "definition of gamma-well-shapedness used here",
+          "citation_lines": [
+            914,
+            918
+          ]
+        }
+      ],
+      "notes": [
+        "The proof first converts the Euclidean inner/outer neighborhood bounds into a topological-boundary tube bound on the torus.",
+        "The $1+\\gamma$ factor accounts for the boundary strip of the fundamental square.",
+        "BRS Lemma 3.1 and equation (5.4), mentioned immediately before the corollary, are contextual comparisons and not proof inputs."
+      ],
+      "certification_status": "pending"
+    },
+    {
+      "id": "rem:koch",
+      "kind": "remark",
+      "number": "4.7",
+      "title": "A fractal-boundary example beyond well-shaped sets",
+      "short_title": "Koch snowflake example",
+      "summary": "Applies the boundary theorem to a Koch snowflake inside the unit square, with $\\alpha=2-\\log 4/\\log 3$, giving exponent $0.539\\ldots$; the same domain is not gamma-well-shaped for any finite gamma.",
+      "section": "4",
+      "branch": "discrepancy",
+      "origin": "Proved or explained in the remark",
+      "tex_label": "rem:koch",
+      "source": {
+        "statement_lines": [
+          930,
+          942
+        ],
+        "proof_lines": [
+          930,
+          942
+        ],
+        "statement_page": 21
+      },
+      "references": [
+        {
+          "bibkey": "LP",
+          "locator": "Section 1",
+          "role": "Koch construction, its bounded complementary domain, construction arcs and Minkowski dimension",
+          "citation_lines": [
+            931,
+            931
+          ]
+        }
+      ],
+      "notes": [
+        "Uses the Koch construction and its Minkowski dimension from LP Section 1, then proves the needed tube upper bound by covering the construction arcs.",
+        "Failure of well-shapedness uses the linear tube bound established in the proof of Corollary 4.6 and the dimension of the boundary, not that corollary's discrepancy conclusion.",
+        "The torus-projection argument is repeated directly. The convex tube inequality is not applied to this nonconvex domain."
+      ],
+      "certification_status": "pending"
+    },
+    {
+      "id": "rem:topological-boundary",
+      "kind": "remark",
+      "number": "4.8",
+      "title": "Why the boundary hypothesis is pointwise",
+      "short_title": "Topological boundary matters",
+      "summary": "The finite set $E=\\mathcal P_X$ has indicator zero almost everywhere but discrepancy one. Thus almost-everywhere or distributional-perimeter information cannot replace the stated pointwise/topological boundary control.",
+      "section": "4",
+      "branch": "discrepancy",
+      "origin": "Proved or explained in the remark",
+      "tex_label": "rem:topological-boundary",
+      "source": {
+        "statement_lines": [
+          944,
+          946
+        ],
+        "proof_lines": [
+          944,
+          946
+        ],
+        "statement_page": 21
+      },
+      "references": [],
+      "notes": [
+        "This is a direct observation from the definitions of the counting measure and Lebesgue measure.",
+        "Theorem 1.4 and Lemma 2.6 are the statements being explained, not prerequisites used to prove the example.",
+        "Do not add theorem-to-remark or remark-to-bracket proof edges merely for this explanatory relationship."
+      ],
+      "certification_status": "pending"
+    },
+    {
+      "id": "lem:arc-brackets",
+      "kind": "lemma",
+      "number": "5.1",
+      "title": "Smooth pointwise brackets for arcs",
+      "short_title": "Arc brackets",
+      "summary": "An arc of length $a$ admits smooth upper and lower brackets with integral error at most $4\\delta$. With $a'=\\min(1,a+4\\delta)$, their coefficients are $\\ll_L\\min\\{a',(1+|m|)^{-1}\\}(1+\\delta|m|)^{-L}$.",
+      "section": "5",
+      "branch": "local_statistics",
+      "origin": "Proved in v39",
+      "tex_label": "lem:arc-brackets",
+      "source": {
+        "statement_lines": [
+          983,
+          988
+        ],
+        "proof_lines": [
+          989,
+          995
+        ],
+        "statement_page": 22
+      },
+      "references": [],
+      "notes": [
+        "The construction applies to the empty arc, a point, and the full circle, as well as ordinary arcs.",
+        "The pointwise construction adapts the proof of Lemma 2.6 to the circle; it does not use a two-dimensional lemma statement as a one-dimensional theorem."
+      ],
+      "certification_status": "pending"
+    },
+    {
+      "id": "cor:difference-shrinking",
+      "kind": "corollary",
+      "number": "5.2",
+      "title": "Relative asymptotics for shrinking difference sets",
+      "short_title": "Shrinking difference sets",
+      "summary": "For $0<\\kappa<1$, a fixed positive-area convex shape at linear scale $t\\ge X^{-1+\\kappa}$ has relative difference-count error $O(X^{-\\kappa/2})$, uniformly in position and orientation within a translated unit square. Products of arcs have the same error when their area is at least $X^{-2+\\kappa}$. Both conclusions hold with and without diagonal pairs under the corresponding normalizations.",
+      "section": "5",
+      "branch": "local_statistics",
+      "origin": "Proved in v39",
+      "tex_label": "cor:difference-shrinking",
+      "source": {
+        "statement_lines": [
+          1042,
+          1055
+        ],
+        "proof_lines": [
+          1056,
+          1066
+        ],
+        "statement_page": 24
+      },
+      "references": [],
+      "notes": [
+        "The distinct-pair clauses also use the separate diagonal-removal estimate (5.4)."
+      ],
+      "certification_status": "pending"
+    },
+    {
+      "id": "lem:one-point",
+      "kind": "lemma",
+      "number": "5.3",
+      "title": "Exact variance for sets containing at most one point in each translate",
+      "short_title": "One-point variance",
+      "summary": "If every translate of a measurable set contains at most one point, its normalized-count variance is $|E|/N_X-|E|^2$. A sufficient condition is containment, after projection, in a strip of width below $X^{-2}$; the stated small-perimeter, narrow-rectangle and small-disc cases follow.",
+      "section": "5",
+      "branch": "local_statistics",
+      "origin": "Proved in v39",
+      "tex_label": "lem:one-point",
+      "source": {
+        "statement_lines": [
+          1072,
+          1078
+        ],
+        "proof_lines": [
+          1079,
+          1085
+        ],
+        "statement_page": 24
+      },
+      "references": [],
+      "notes": [
+        "The identity is proved directly from the two possible count values, without invoking Theorem 1.6.",
+        "The sufficient condition uses the coordinate separation and width arguments proved with Proposition 4.3."
+      ],
+      "certification_status": "pending"
+    },
+    {
+      "id": "cor:variance-shrinking",
+      "kind": "corollary",
+      "number": "5.4",
+      "title": "Small exceptional sets for translates of shrinking convex shapes",
+      "short_title": "Most translates",
+      "summary": "For a fixed positive-area convex shape at scale $t\\ge X^{-1+\\kappa}$, the centers with relative count error greater than $\\lambda$ have measure $\\ll_{K_0,\\kappa}\\lambda^{-2}X^{-3\\kappa/2}$, uniformly over admissible rotations and scales, for $0<\\kappa<1$ and $0<\\lambda\\le1$.",
+      "section": "5",
+      "branch": "local_statistics",
+      "origin": "Proved in v39",
+      "tex_label": "cor:variance-shrinking",
+      "source": {
+        "statement_lines": [
+          1121,
+          1127
+        ],
+        "proof_lines": [
+          1128,
+          1134
+        ],
+        "statement_page": 26
+      },
+      "references": [],
+      "notes": [
+        "The exceptional set may depend on the chosen shape, orientation and scale; this corollary does not assert one set for every orientation or scale."
+      ],
+      "certification_status": "pending"
+    },
+    {
+      "id": "cor:simultaneous",
+      "kind": "corollary",
+      "number": "5.5",
+      "title": "One exceptional set for a range of disc radii",
+      "short_title": "All radii simultaneously",
+      "summary": "For $r_0\\le r\\le1/4$, a single exceptional set has measure $\\ll_\\varepsilon\\lambda^{-3}X^\\varepsilon(X^{-2}r_0^{-2}+X^{-5/3}r_0^{-2/3})$ and outside it every disc count has relative error $O(\\lambda)$. Open and closed discs are included. Taking $r_0=X^{-1+\\kappa}$ and $\\lambda=X^{-\\kappa/3}$ yields exceptional measure $\\ll_\\kappa X^{-\\kappa/2}$ for sufficiently large $X$.",
+      "section": "5",
+      "branch": "local_statistics",
+      "origin": "Proved in v39",
+      "tex_label": "cor:simultaneous",
+      "source": {
+        "statement_lines": [
+          1140,
+          1150
+        ],
+        "proof_lines": [
+          1151,
+          1165
+        ],
+        "statement_page": 26
+      },
+      "references": [],
+      "notes": [
+        "The extra factor $\\lambda^{-1}$ comes from summing over a geometric grid of radii; monotonicity extends the conclusion to intermediate radii.",
+        "The proof also removes a finite union of boundary circles, a null set.",
+        "This uses the disc variance clause directly rather than Corollary 5.4."
+      ],
+      "certification_status": "pending"
+    },
+    {
+      "id": "external:BRS-theorem-1-3",
+      "kind": "external",
+      "title": "BRS second moment with one frequency fixed",
+      "short_title": "BRS, Theorem 1.3",
+      "summary": "The fixed-height signed-frequency second moment used as Theorem 2.1.",
+      "branch": "literature",
+      "origin": "Cited literature input",
+      "references": [
+        {
+          "bibkey": "BRS",
+          "locator": "Theorem 1.3; Section 2.1 for the small-power convention"
+        }
+      ],
+      "trust_status": "trusted_literature_input",
+      "notes": []
+    },
+    {
+      "id": "external:Xi-selberg-identity",
+      "kind": "external",
+      "title": "Selberg identity for integer Kloosterman arguments",
+      "short_title": "Xi, Selberg identity",
+      "summary": "Elementary proof cited for equation (2.4); v39 gives no numbered locator for this citation.",
+      "branch": "literature",
+      "origin": "Cited literature input",
+      "references": [
+        {
+          "bibkey": "Xi",
+          "locator": "Paper cited without a numbered locator"
+        }
+      ],
+      "trust_status": "trusted_literature_input",
+      "notes": []
+    },
+    {
+      "id": "external:IK-equation-1-81",
+      "kind": "external",
+      "title": "Divisor small-power bound",
+      "short_title": "IK, (1.81)",
+      "summary": "For each positive eta, tau(v)<<_eta v^eta.",
+      "branch": "literature",
+      "origin": "Cited literature input",
+      "references": [
+        {
+          "bibkey": "IK",
+          "locator": "Equation (1.81)"
+        }
+      ],
+      "trust_status": "trusted_literature_input",
+      "notes": []
+    },
+    {
+      "id": "external:IK-equation-3-2",
+      "kind": "external",
+      "title": "Ramanujan-sum identity",
+      "short_title": "IK, (3.2)",
+      "summary": "The divisor expression for Ramanujan sums used to bound the coordinate axes.",
+      "branch": "literature",
+      "origin": "Cited literature input",
+      "references": [
+        {
+          "bibkey": "IK",
+          "locator": "Equation (3.2)"
+        }
+      ],
+      "trust_status": "trusted_literature_input",
+      "notes": []
+    },
+    {
+      "id": "external:HW-theorem-330",
+      "kind": "external",
+      "title": "Summatory totient estimate",
+      "short_title": "Hardy-Wright, Theorem 330",
+      "summary": "Mertens's estimate gives N_X=(3/pi^2)X^2+O(X log X).",
+      "branch": "literature",
+      "origin": "Cited literature input",
+      "references": [
+        {
+          "bibkey": "HW",
+          "locator": "Theorem 330"
+        }
+      ],
+      "trust_status": "trusted_literature_input",
+      "notes": []
+    },
+    {
+      "id": "external:Grafakos-section-3-2-2",
+      "kind": "external",
+      "title": "Parseval identity on the torus",
+      "short_title": "Grafakos, Section 3.2.2",
+      "summary": "The L2 norm is the sum of squared Fourier coefficients.",
+      "branch": "literature",
+      "origin": "Cited literature input",
+      "references": [
+        {
+          "bibkey": "Grafakos",
+          "locator": "Section 3.2.2"
+        }
+      ],
+      "trust_status": "trusted_literature_input",
+      "notes": []
+    },
+    {
+      "id": "external:Grafakos-sections-3-3-2-and-3-3-3",
+      "kind": "external",
+      "title": "Fourier inversion for smooth periodic functions",
+      "short_title": "Grafakos, Sections 3.3.2-3.3.3",
+      "summary": "Rapid coefficient decay and absolute uniform Fourier inversion for smooth torus functions.",
+      "branch": "literature",
+      "origin": "Cited literature input",
+      "references": [
+        {
+          "bibkey": "Grafakos",
+          "locator": "Sections 3.3.2 and 3.3.3"
+        }
+      ],
+      "trust_status": "trusted_literature_input",
+      "notes": []
+    },
+    {
+      "id": "external:Grafakos-section-3-1-2",
+      "kind": "external",
+      "title": "Fourier coefficients of a convolution",
+      "short_title": "Grafakos, Section 3.1.2",
+      "summary": "Convolution multiplies Fourier coefficients.",
+      "branch": "literature",
+      "origin": "Cited literature input",
+      "references": [
+        {
+          "bibkey": "Grafakos",
+          "locator": "Section 3.1.2"
+        }
+      ],
+      "trust_status": "trusted_literature_input",
+      "notes": []
+    },
+    {
+      "id": "eq:point-fourier",
+      "kind": "auxiliary",
+      "title": "Fourier transform of the modular inverse point set",
+      "short_title": "Point-set Fourier transform",
+      "summary": "The finite exponential sum over $\\mathcal P_X$ equals $A_X(m,n)=\\sum_{c\\le X}S(m,n;c)$, with every point counted once and the modulus-one point represented by $S(m,n;1)=1$.",
+      "source": {
+        "lines": [
+          370,
+          374
+        ]
+      },
+      "section": "2",
+      "branch": "arithmetic",
+      "origin": "In-text supporting step",
+      "tex_label": "eq:point-fourier",
+      "equations": [
+        {
+          "label": "eq:point-fourier",
+          "number": "2.1"
+        }
+      ],
+      "references": [],
+      "notes": [],
+      "certification_status": "pending"
+    },
+    {
+      "id": "step:cardinality-comparison",
+      "kind": "auxiliary",
+      "title": "Point-set cardinality and quadratic scale",
+      "short_title": "Cardinality comparison",
+      "summary": "The point count is $N_X=\\sum_{c\\le X}\\varphi(c)=(3/\\pi^2)X^2+O(X\\log X)$; in particular $N_X\\asymp X^2$ for $X\\ge2$.",
+      "source": {
+        "lines": [
+          155,
+          159
+        ]
+      },
+      "section": "1",
+      "branch": "arithmetic",
+      "origin": "In-text supporting step",
+      "tex_label": null,
+      "equations": [],
+      "references": [
+        {
+          "bibkey": "HW",
+          "locator": "Theorem 330",
+          "role": "Summatory totient asymptotic"
+        }
+      ],
+      "notes": [
+        "The lower bound is recalled immediately before Corollary 2.4 at line 452."
+      ],
+      "certification_status": "pending"
+    },
+    {
+      "id": "step:normalized-coefficient-bound",
+      "kind": "auxiliary",
+      "title": "Trivial bound for normalized point coefficients",
+      "short_title": "Normalized coefficient bound",
+      "summary": "The normalized coefficients satisfy $a_X(k)=N_X^{-1}\\sum_{z\\in\\mathcal P_X}e(k\\cdot z)$, $a_X(0)=1$ and $|a_X(k)|\\le1$.",
+      "source": {
+        "lines": [
+          364,
+          374
+        ]
+      },
+      "section": "2",
+      "branch": "arithmetic",
+      "origin": "In-text supporting step",
+      "tex_label": null,
+      "equations": [],
+      "references": [],
+      "notes": [
+        "Used again at line 470 and in the convergence assertion of Proposition 3.1(iii)."
+      ],
+      "certification_status": "pending"
+    },
+    {
+      "id": "step:kloosterman-symmetries",
+      "kind": "auxiliary",
+      "title": "Interchange and simultaneous sign reversal",
+      "short_title": "Kloosterman symmetries",
+      "summary": "The elementary changes of variables give $S(m,n;c)=S(n,m;c)$ and $S(-m,-n;c)=S(m,n;c)$.",
+      "source": {
+        "lines": [
+          374,
+          374
+        ]
+      },
+      "section": "2",
+      "branch": "arithmetic",
+      "origin": "In-text supporting step",
+      "tex_label": null,
+      "equations": [],
+      "references": [],
+      "notes": [],
+      "certification_status": "pending"
+    },
+    {
+      "id": "eq:selberg",
+      "kind": "auxiliary",
+      "title": "Selberg's identity for Kloosterman sums",
+      "short_title": "Selberg identity",
+      "summary": "For integers $m,n$ and $c\\ge1$, $S(m,n;c)=\\sum_{d\\mid\\gcd(m,n,c)}d\\,S(mn/d^2,1;c/d)$.",
+      "source": {
+        "lines": [
+          401,
+          405
+        ]
+      },
+      "section": "2",
+      "branch": "arithmetic",
+      "origin": "Cited identity",
+      "tex_label": "eq:selberg",
+      "equations": [
+        {
+          "label": "eq:selberg",
+          "number": "2.4"
+        }
+      ],
+      "references": [
+        {
+          "bibkey": "Selberg38",
+          "locator": "Paper cited without a numbered locator",
+          "role": "Historical attribution"
+        },
+        {
+          "bibkey": "Kuznetsov",
+          "locator": "Paper cited without a numbered locator",
+          "role": "Published proof reference"
+        },
+        {
+          "bibkey": "Xi",
+          "locator": "Paper cited without a numbered locator",
+          "role": "Elementary proof reference"
+        },
+        {
+          "bibkey": "BRS",
+          "locator": "Section 4.1",
+          "role": "Attribution of the general-frequency reduction"
+        }
+      ],
+      "notes": [
+        "v39 cites Xi as a whole paper; it does not give the equation locator used in the other manuscript."
+      ],
+      "certification_status": "pending"
+    },
+    {
+      "id": "eq:selberg-summed",
+      "kind": "auxiliary",
+      "title": "Cumulative Selberg identity",
+      "short_title": "Cumulative Selberg identity",
+      "summary": "For $mn\\ne0$, summing Selberg's identity over the modulus gives $A_X(m,n)=\\sum_{d\\mid\\gcd(|m|,|n|),\\,d\\le X}d\\,A_{X/d}(mn/d^2,1)$.",
+      "source": {
+        "lines": [
+          405,
+          408
+        ]
+      },
+      "section": "2",
+      "branch": "arithmetic",
+      "origin": "In-text supporting step",
+      "tex_label": "eq:selberg-summed",
+      "equations": [
+        {
+          "label": "eq:selberg-summed",
+          "number": "2.5"
+        }
+      ],
+      "references": [],
+      "notes": [],
+      "certification_status": "pending"
+    },
+    {
+      "id": "step:divisor-small-power",
+      "kind": "auxiliary",
+      "title": "Small-power divisor estimate",
+      "short_title": "Divisor bound",
+      "summary": "For every $\\eta>0$ and integer $v\\ge1$, $\\tau(v)\\ll_\\eta v^\\eta$.",
+      "source": {
+        "lines": [
+          417,
+          417
+        ]
+      },
+      "section": "2",
+      "branch": "arithmetic",
+      "origin": "Cited estimate",
+      "tex_label": null,
+      "equations": [],
+      "references": [
+        {
+          "bibkey": "IK",
+          "locator": "Equation (1.81)",
+          "role": "Divisor bound"
+        }
+      ],
+      "notes": [],
+      "certification_status": "pending"
+    },
+    {
+      "id": "step:rectangular-divisor-reduction",
+      "kind": "auxiliary",
+      "title": "Off-axis reduction of the rectangular second moment",
+      "short_title": "Off-axis divisor reduction",
+      "summary": "Cauchy–Schwarz over divisors and at most $2\\tau(|r|)$ signed factorizations $uv=r$ reduce the off-axis second moment to $\\sum_{d\\le\\min(M,N,X)}d^2\\sum_{1\\le|r|\\le MN/d^2}|A_{X/d}(r,1)|^2$. The cumulative input applies with $R=MN/d^2\\ge1$, $Y=X/d\\ge1$; the divisor sums have weights $d^{-2}$ and $d^{-1}$.",
+      "source": {
+        "lines": [
+          419,
+          435
+        ]
+      },
+      "section": "2",
+      "branch": "arithmetic",
+      "origin": "In-text supporting step",
+      "tex_label": null,
+      "equations": [],
+      "references": [],
+      "notes": [
+        "The divisor cutoff prevents any use of the cited moment bound below height one.",
+        "This is the off-axis component of Proposition 2.3, not a separate numbered result."
+      ],
+      "certification_status": "pending",
+      "component_of": "prop:rectangular"
+    },
+    {
+      "id": "step:axis-ramanujan-bound",
+      "kind": "auxiliary",
+      "title": "Axis contribution from Ramanujan sums",
+      "short_title": "Axis bound",
+      "summary": "The Ramanujan formula $S(0,n;c)=\\sum_{d\\mid\\gcd(c,n)}d\\mu(c/d)$ gives $|A_X(0,n)|\\le X\\tau(|n|)$; symmetry gives the corresponding bound on the other axis. The divisor estimate then bounds both axes by $O_\\eta(MNX^2(MN)^{2\\eta})$.",
+      "source": {
+        "lines": [
+          437,
+          447
+        ]
+      },
+      "section": "2",
+      "branch": "arithmetic",
+      "origin": "In-text supporting step",
+      "tex_label": null,
+      "equations": [],
+      "references": [
+        {
+          "bibkey": "IK",
+          "locator": "Equation (3.2)",
+          "role": "Ramanujan sum formula"
+        }
+      ],
+      "notes": [],
+      "certification_status": "pending",
+      "component_of": "prop:rectangular"
+    },
+    {
+      "id": "step:fourier-translation-rule",
+      "kind": "auxiliary",
+      "title": "Fourier coefficients of a translate",
+      "short_title": "Fourier translation rule",
+      "summary": "With $\\widehat f(k)=\\int_{\\mathbb T^2}f(x)e(-k\\cdot x)\\,dx$, one has $\\widehat{f(\\cdot+h)}(k)=e(k\\cdot h)\\widehat f(k)$.",
+      "source": {
+        "lines": [
+          360,
+          364
+        ]
+      },
+      "section": "1",
+      "branch": "fourier",
+      "origin": "In-text supporting step",
+      "tex_label": null,
+      "equations": [],
+      "references": [],
+      "notes": [
+        "Recalled with the other Fourier facts at line 477."
+      ],
+      "certification_status": "pending"
+    },
+    {
+      "id": "eq:mollifier-decay",
+      "kind": "auxiliary",
+      "title": "Positive periodic mollifier and Fourier decay",
+      "short_title": "Mollifier decay",
+      "summary": "For $0<\\delta\\le1/8$, the periodized mollifier $\\rho_\\delta$ is nonnegative, has integral one and support within distance $\\delta$ of zero. Integration by parts proves $|\\widehat{\\rho_\\delta}(k)|\\ll_L(1+\\delta\\|k\\|_\\infty)^{-L}$ for every $L>0$.",
+      "source": {
+        "lines": [
+          511,
+          524
+        ]
+      },
+      "section": "2",
+      "branch": "fourier",
+      "origin": "In-text supporting step",
+      "tex_label": "eq:mollifier-decay",
+      "equations": [
+        {
+          "label": "eq:mollifier-decay",
+          "number": "2.11"
+        }
+      ],
+      "references": [],
+      "notes": [],
+      "certification_status": "pending"
+    },
+    {
+      "id": "step:boundary-crossing",
+      "kind": "auxiliary",
+      "title": "Boundary crossing along a short torus path",
+      "short_title": "Boundary-crossing argument",
+      "summary": "A shortest lifted segment joining a point of $E$ to a point of $E^c$ meets $\\partial E$. Applied to the inner and outer sets used for smoothing, this places their indicator differences from $\\mathbf1_E$ within the $3\\delta$ boundary neighborhood.",
+      "source": {
+        "lines": [
+          555,
+          555
+        ]
+      },
+      "section": "2",
+      "branch": "geometry",
+      "origin": "In-text supporting step",
+      "tex_label": null,
+      "equations": [],
+      "references": [],
+      "notes": [
+        "The same path argument is reused in Remark 2.9 for a translation; the numerical content of Lemma 2.5 is not involved."
+      ],
+      "certification_status": "pending"
+    },
+    {
+      "id": "eq:bracket-difference-norms",
+      "kind": "auxiliary",
+      "title": "Boundary-neighborhood control of smoothing errors",
+      "short_title": "Bracket difference norms",
+      "summary": "For the inner and outer sets $E_\\pm$, $\\|\\mathbf1_{E_\\pm}-\\mathbf1_E\\|_1\\le b_E(3\\delta)$ and $\\|\\mathbf1_{E_\\pm}-\\mathbf1_E\\|_2^2\\le b_E(3\\delta)$.",
+      "source": {
+        "lines": [
+          555,
+          559
+        ]
+      },
+      "section": "2",
+      "branch": "geometry",
+      "origin": "In-text supporting step",
+      "tex_label": "eq:bracket-difference-norms",
+      "equations": [
+        {
+          "label": "eq:bracket-difference-norms",
+          "number": "2.16"
+        }
+      ],
+      "references": [],
+      "notes": [],
+      "certification_status": "pending",
+      "component_of": "lem:brackets"
+    },
+    {
+      "id": "step:convex-boundary-geometry",
+      "kind": "auxiliary",
+      "title": "Elementary boundary geometry for a convex set",
+      "short_title": "Convex boundary geometry",
+      "summary": "For a convex body in a unit square, the boundary is a rectifiable Jordan curve of length $P\\le4$. The arc covering argument shows that it has measure zero, while convexity gives $\\operatorname{int}\\overline\\Omega\\subset\\Omega$. Thus $\\mathbf1_\\Omega=\\mathbf1_{\\overline\\Omega}$ almost everywhere. Degenerate sets are handled separately.",
+      "source": {
+        "lines": [
+          589,
+          597
+        ]
+      },
+      "section": "2",
+      "branch": "geometry",
+      "origin": "In-text supporting step",
+      "tex_label": null,
+      "equations": [],
+      "references": [],
+      "notes": [
+        "The coordinate-width proof of P≤4 is at line 591; the null-boundary conclusion is at line 597; segments, points and the empty set are discussed at line 614.",
+        "This auxiliary geometric foundation is proved in the manuscript, not imported from the introductory Fourier-decay literature."
+      ],
+      "certification_status": "pending",
+      "component_of": "lem:convex-geometry"
+    },
+    {
+      "id": "eq:convex-tube",
+      "kind": "auxiliary",
+      "title": "Boundary tube bound for a projected convex set",
+      "short_title": "Convex boundary tube",
+      "summary": "For $E=\\pi\\Omega$ with convex $\\Omega\\subset u+[0,1)^2$, $b_E(s)\\le4\\pi(Ps+s^2)$ for $0<s\\le1$. A cover of the Euclidean boundary is projected to the torus, using $\\partial E\\subset\\pi(\\partial\\overline\\Omega)$ and that projection does not increase measure.",
+      "source": {
+        "lines": [
+          593,
+          597
+        ]
+      },
+      "section": "2",
+      "branch": "geometry",
+      "origin": "In-text supporting step",
+      "tex_label": "eq:convex-tube",
+      "equations": [
+        {
+          "label": "eq:convex-tube",
+          "number": "2.17"
+        }
+      ],
+      "references": [],
+      "notes": [
+        "The statement is at line 581; degenerate cases are proved at line 614."
+      ],
+      "certification_status": "pending",
+      "component_of": "lem:convex-geometry"
+    },
+    {
+      "id": "eq:convex-translation",
+      "kind": "auxiliary",
+      "title": "Convex translation estimate with constant one",
+      "short_title": "Convex translation",
+      "summary": "Parallel-line slicing gives $|(K+h)\\triangle K|\\le P|h|_2$, since the perpendicular width is at most $P/2$. Periodization then yields $\\|\\mathbf1_E(\\cdot+h)-\\mathbf1_E\\|_2^2\\le P|h|_2$ on the torus for every $h\\in\\mathbb R^2$.",
+      "source": {
+        "lines": [
+          599,
+          608
+        ]
+      },
+      "section": "2",
+      "branch": "geometry",
+      "origin": "In-text supporting step",
+      "tex_label": "eq:convex-translation",
+      "equations": [
+        {
+          "label": "eq:convex-translation",
+          "number": "2.18"
+        }
+      ],
+      "references": [],
+      "notes": [
+        "The statement is at line 582; the null-boundary reduction is used explicitly at line 603; degenerate cases are at line 614."
+      ],
+      "certification_status": "pending",
+      "component_of": "lem:convex-geometry"
+    },
+    {
+      "id": "eq:convex-tail",
+      "kind": "auxiliary",
+      "title": "Fourier-energy tail for a convex indicator",
+      "short_title": "Convex Fourier tail",
+      "summary": "The translation estimate with $\\Lambda=P$ and $\\alpha=1$ in Lemma 2.5 yields $\\sum_{\\|k\\|_\\infty\\ge T}|\\widehat{\\mathbf1_E}(k)|^2\\ll P/T$ for $T\\ge1$, and hence the same bound on a dyadic shell.",
+      "source": {
+        "lines": [
+          610,
+          610
+        ]
+      },
+      "section": "2",
+      "branch": "geometry",
+      "origin": "In-text supporting step",
+      "tex_label": "eq:convex-tail",
+      "equations": [
+        {
+          "label": "eq:convex-tail",
+          "number": "2.19"
+        }
+      ],
+      "references": [],
+      "notes": [
+        "The statement is at lines 583 and 586."
+      ],
+      "certification_status": "pending",
+      "component_of": "lem:convex-geometry"
+    },
+    {
+      "id": "eq:convex-pointwise",
+      "kind": "auxiliary",
+      "title": "Pointwise Fourier decay for a convex indicator",
+      "short_title": "Convex coefficient bound",
+      "summary": "For $k\\ne0$, the special translation $h=k/(2|k|_2^2)$ has multiplier $-2$ and gives $|\\widehat{\\mathbf1_E}(k)|\\le P/(4|k|_2)$. Combining this with the trivial area bound gives $\\min\\{A,P/(4|k|_2)\\}$.",
+      "source": {
+        "lines": [
+          612,
+          612
+        ]
+      },
+      "section": "2",
+      "branch": "geometry",
+      "origin": "In-text supporting step",
+      "tex_label": "eq:convex-pointwise",
+      "equations": [
+        {
+          "label": "eq:convex-pointwise",
+          "number": "2.20"
+        }
+      ],
+      "references": [],
+      "notes": [
+        "The statement is at line 584. The notation |k|_2 is Euclidean length, not the second coordinate."
+      ],
+      "certification_status": "pending",
+      "component_of": "lem:convex-geometry"
+    },
+    {
+      "id": "eq:identity-mu",
+      "kind": "auxiliary",
+      "title": "Smooth Fourier identity for uniform counting",
+      "short_title": "Counting identity",
+      "summary": "For smooth $f$, $\\int f\\,d\\mu_X-\\int f=\\sum_{k\\ne0}\\widehat f(k)a_X(k)$, with absolute convergence. It follows by pointwise smooth Fourier inversion and a finite average over $\\mathcal P_X$.",
+      "source": {
+        "lines": [
+          662,
+          666
+        ]
+      },
+      "section": "3",
+      "branch": "identities",
+      "origin": "In-text supporting step",
+      "tex_label": "eq:identity-mu",
+      "equations": [
+        {
+          "label": "eq:identity-mu",
+          "number": "3.1"
+        }
+      ],
+      "references": [
+        {
+          "bibkey": "Grafakos",
+          "locator": "Sections 3.3.2 and 3.3.3",
+          "role": "Smooth Fourier inversion"
+        }
+      ],
+      "notes": [
+        "The statement is at lines 643–647."
+      ],
+      "certification_status": "pending",
+      "component_of": "prop:identities"
+    },
+    {
+      "id": "eq:identity-nu",
+      "kind": "auxiliary",
+      "title": "Smooth Fourier identity for the difference measure",
+      "short_title": "Difference identity",
+      "summary": "For smooth $f$, $\\int f\\,d\\nu_X-\\int f=\\sum_{k\\ne0}\\widehat f(k)|a_X(k)|^2$, with absolute convergence. The finite double exponential sum factors as $a_X(k)\\overline{a_X(k)}$.",
+      "source": {
+        "lines": [
+          668,
+          672
+        ]
+      },
+      "section": "3",
+      "branch": "identities",
+      "origin": "In-text supporting step",
+      "tex_label": "eq:identity-nu",
+      "equations": [
+        {
+          "label": "eq:identity-nu",
+          "number": "3.2"
+        }
+      ],
+      "references": [
+        {
+          "bibkey": "Grafakos",
+          "locator": "Sections 3.3.2 and 3.3.3",
+          "role": "Smooth Fourier inversion"
+        }
+      ],
+      "notes": [
+        "The statement is at lines 648–652. This does not require the numerical difference-distribution theorem."
+      ],
+      "certification_status": "pending",
+      "component_of": "prop:identities"
+    },
+    {
+      "id": "eq:identity-variance",
+      "kind": "auxiliary",
+      "title": "Parseval identity for translation variance",
+      "short_title": "Variance identity",
+      "summary": "For every measurable $E$, the finite reflected-translate sum $Z_E(u)=\\mu_X(u+E)-|E|$ has nonzero Fourier coefficients $a_X(-k)\\widehat{\\mathbf1_E}(-k)$. Parseval gives $\\mathcal V_X(E)=\\sum_{k\\ne0}|\\widehat{\\mathbf1_E}(k)|^2|a_X(k)|^2$.",
+      "source": {
+        "lines": [
+          674,
+          683
+        ]
+      },
+      "section": "3",
+      "branch": "identities",
+      "origin": "In-text supporting step",
+      "tex_label": "eq:identity-variance",
+      "equations": [
+        {
+          "label": "eq:identity-variance",
+          "number": "3.3"
+        }
+      ],
+      "references": [
+        {
+          "bibkey": "Grafakos",
+          "locator": "Section 3.2.2",
+          "role": "Parseval"
+        }
+      ],
+      "notes": [
+        "The statement and convergence justification are at lines 653–657; |a_X(k)|≤1 bounds the series by the indicator's L² energy."
+      ],
+      "certification_status": "pending",
+      "component_of": "prop:identities"
+    },
+    {
+      "id": "step:variance-null-set-invariance",
+      "kind": "auxiliary",
+      "title": "Variance is unchanged by null-set changes",
+      "short_title": "Variance and null sets",
+      "summary": "The variance identity depends only on the $L^2$ class of $\\mathbf1_E$, so changing $E$ on a null set leaves $\\mathcal V_X(E)$ unchanged. In particular, boundary choices do not affect convex-set variance.",
+      "source": {
+        "lines": [
+          686,
+          686
+        ]
+      },
+      "section": "3",
+      "branch": "identities",
+      "origin": "In-text supporting step",
+      "tex_label": null,
+      "equations": [],
+      "references": [],
+      "notes": [],
+      "certification_status": "pending"
+    },
+    {
+      "id": "step:indicator-translation-norms",
+      "kind": "auxiliary",
+      "title": "Equality of translation norms for indicators",
+      "short_title": "Indicator translation norms",
+      "summary": "For an indicator, $\\|\\mathbf1_E(\\cdot+h)-\\mathbf1_E\\|_2^2=\\|\\mathbf1_E(\\cdot+h)-\\mathbf1_E\\|_1=|(E-h)\\triangle E|$.",
+      "source": {
+        "lines": [
+          509,
+          509
+        ]
+      },
+      "section": "2",
+      "branch": "geometry",
+      "origin": "In-text supporting step",
+      "tex_label": null,
+      "equations": [],
+      "references": [],
+      "notes": [
+        "Used to apply the L² translation lemma to geometric symmetric-difference bounds."
+      ],
+      "certification_status": "pending"
+    },
+    {
+      "id": "step:pointwise-discrepancy-reduction",
+      "kind": "auxiliary",
+      "title": "From pointwise brackets to a Fourier discrepancy bound",
+      "short_title": "Pointwise bracket reduction",
+      "summary": "Pointwise upper and lower brackets reduce discrepancy to the larger smooth counting Fourier sum plus their integral error. The same reduction applies to general measurable sets.",
+      "section": "4",
+      "branch": "discrepancy",
+      "origin": "In-text supporting step",
+      "tex_label": null,
+      "source": {
+        "lines": [
+          743,
+          750
+        ]
+      },
+      "equations": [
+        {
+          "label": "eq:smoothing-reduction",
+          "number": "4.2"
+        }
+      ],
+      "references": [],
+      "notes": [
+        "The displayed convex specialization is equation (4.2). Line 883 explicitly reuses the argument with boundary error $3B\\delta^{\\alpha}$.",
+        "This auxiliary node records the generic reduction proved by the argument, not a new numbered result.",
+        "No convex error estimate is built into this node; it is supplied separately in each application."
+      ],
+      "certification_status": "pending"
+    },
+    {
+      "id": "step:coordinate-counting",
+      "kind": "auxiliary",
+      "title": "Injective coordinate projections and counting in short intervals",
+      "short_title": "Coordinate counting",
+      "summary": "Distinct points have distinct coordinates; their lifts have coordinate spacing at least $X^{-2}$. A width-$w_j$ interval therefore contains at most $1+w_jX^2$ lifted points.",
+      "section": "4",
+      "branch": "discrepancy",
+      "origin": "In-text supporting step",
+      "tex_label": null,
+      "source": {
+        "lines": [
+          816,
+          824
+        ]
+      },
+      "equations": [],
+      "references": [],
+      "notes": [
+        "This is denominator arithmetic for the specific point set, not an application of a cited Farey discrepancy theorem.",
+        "The coordinate injectivity and count are proved separately for the two coordinates."
+      ],
+      "certification_status": "pending"
+    },
+    {
+      "id": "eq:combined-small",
+      "kind": "auxiliary",
+      "title": "Combining geometric and Fourier discrepancy estimates",
+      "short_title": "Combined discrepancy bound (4.4)",
+      "summary": "Takes the smaller of the coordinate-width bound and the perimeter-sensitive Fourier bound.",
+      "section": "4",
+      "branch": "discrepancy",
+      "origin": "In-text supporting step",
+      "tex_label": "eq:combined-small",
+      "source": {
+        "lines": [
+          827,
+          830
+        ]
+      },
+      "equations": [
+        {
+          "label": "eq:combined-small",
+          "number": "4.4"
+        }
+      ],
+      "references": [],
+      "notes": [],
+      "certification_status": "pending"
+    },
+    {
+      "id": "step:cardinality-upper",
+      "kind": "auxiliary",
+      "title": "Elementary upper bound for the point count",
+      "short_title": "Elementary cardinality bound",
+      "summary": "The identity $N_X=\\sum_{c\\le X}\\varphi(c)$ and $\\varphi(c)\\le c$ give $N_X\\le X^2$ for $X\\ge1$. This elementary upper bound is used in the small-perimeter examples and repeated in the lower distance estimate.",
+      "section": "4",
+      "branch": "discrepancy",
+      "origin": "In-text supporting step",
+      "tex_label": null,
+      "source": {
+        "lines": [
+          [
+            853,
+            857
+          ],
+          [
+            1189,
+            1192
+          ]
+        ]
+      },
+      "equations": [],
+      "references": [],
+      "notes": [
+        "The printed calculation is made for integer X. The point set and its cardinality depend only on floor(X), so the same upper bound holds for real X>=1.",
+        "Do not replace this elementary input by the full summatory-totient asymptotic merely because the latter also appears in the introduction."
+      ],
+      "certification_status": "pending"
+    },
+    {
+      "id": "step:short-perimeter-diagonal-lower",
+      "kind": "auxiliary",
+      "title": "Diagonal segments realizing the short-perimeter lower order",
+      "short_title": "Short diagonal lower bound",
+      "summary": "A segment starting at $(1/X,1/X)$ captures both one point and a number proportional to $pX^2$; division by $N_X$ gives the two terms in the lower bound. Integer parts handle real heights.",
+      "section": "4",
+      "branch": "discrepancy",
+      "origin": "In-text supporting step",
+      "tex_label": null,
+      "source": {
+        "lines": [
+          845,
+          857
+        ]
+      },
+      "equations": [],
+      "references": [],
+      "notes": [
+        "The segment perimeter is twice its length, as required by the manuscript's degenerate-perimeter convention.",
+        "At p=0 the segment is a single point."
+      ],
+      "certification_status": "pending"
+    },
+    {
+      "id": "step:boundary-fourier-control",
+      "kind": "auxiliary",
+      "title": "From boundary tubes to Fourier and bracket norms",
+      "short_title": "Boundary Fourier control",
+      "summary": "A path crossing the topological boundary bounds the symmetric difference by $B|h|_2^{\\alpha}$; the translation lemma and smooth brackets then give shell norms uniformly in alpha.",
+      "section": "4",
+      "branch": "discrepancy",
+      "origin": "In-text supporting step",
+      "tex_label": null,
+      "source": {
+        "lines": [
+          873,
+          881
+        ]
+      },
+      "equations": [],
+      "references": [],
+      "notes": [
+        "The method borrowed from Remark 2.9 is the boundary-crossing containment, not its linear-in-|h| conclusion.",
+        "The translation lemma's explicit constant is uniformly bounded for $0<\\alpha\\le1$.",
+        "The bracket error is at most $3B\\delta^{\\alpha}$."
+      ],
+      "certification_status": "pending"
+    },
+    {
+      "id": "step:boundary-uniform-dyadic",
+      "kind": "auxiliary",
+      "title": "Dyadic summation uniform in the boundary exponent",
+      "short_title": "Uniform boundary dyadic sums",
+      "summary": "Uses the explicit geometric-series constants for exponents in compact positive ranges, and treats $\\beta=1/3-\\alpha/2$ directly through zero with a logarithmic cutoff factor.",
+      "section": "4",
+      "branch": "discrepancy",
+      "origin": "In-text supporting step",
+      "tex_label": null,
+      "source": {
+        "lines": [
+          888,
+          892
+        ]
+      },
+      "equations": [],
+      "references": [],
+      "notes": [
+        "Lemma 4.1's statement does not cover exponent zero and its arbitrary-s constant alone does not supply alpha-uniformity.",
+        "The direct near-zero estimate is substantive support for the epsilon-only constant in Theorem 1.4."
+      ],
+      "certification_status": "pending"
+    },
+    {
+      "id": "eq:general-smoothing",
+      "kind": "auxiliary",
+      "title": "Smoothing estimate for a general boundary tube bound",
+      "short_title": "General boundary smoothing (4.6)",
+      "summary": "Combines the pointwise discrepancy reduction, boundary-based bracket norms, arithmetic shell estimate and uniform dyadic sums before optimizing delta.",
+      "section": "4",
+      "branch": "discrepancy",
+      "origin": "In-text supporting step",
+      "tex_label": "eq:general-smoothing",
+      "source": {
+        "lines": [
+          883,
+          896
+        ]
+      },
+      "equations": [
+        {
+          "label": "eq:general-smoothing",
+          "number": "4.6"
+        }
+      ],
+      "references": [],
+      "notes": [
+        "This estimate has a constant independent of alpha, B, E, X and delta, apart from its stated dependence on eta.",
+        "It is proved anew; the convex numerical estimate of Proposition 4.2 is not invoked."
+      ],
+      "certification_status": "pending"
+    },
+    {
+      "id": "step:well-shaped-torus-tube",
+      "kind": "auxiliary",
+      "title": "From Euclidean well-shapedness to torus boundary control",
+      "short_title": "Well-shaped torus tubes",
+      "summary": "Separates a strip near the unit-square boundary from interior discs to obtain $b_{\\pi\\Omega}(s)\\le(8+4\\gamma)s$ at small s, and an admissible global constant $B=8(1+\\gamma)$ for alpha one.",
+      "section": "4",
+      "branch": "discrepancy",
+      "origin": "In-text supporting step",
+      "tex_label": null,
+      "source": {
+        "lines": [
+          927,
+          927
+        ]
+      },
+      "equations": [],
+      "references": [],
+      "notes": [
+        "This uses the pointwise definition of the topological boundary, not a boundary chosen up to a null set.",
+        "The same linear tube consequence is later used to rule out well-shapedness of the Koch example."
+      ],
+      "certification_status": "pending"
+    },
+    {
+      "id": "step:koch-tube",
+      "kind": "auxiliary",
+      "title": "Tube control for a Koch boundary",
+      "short_title": "Koch boundary tube control",
+      "summary": "The construction arcs give a covering by $O((\\ell/s)^d)$ discs of radius $O(s)$, yielding boundary-tube order at most $s^{2-d}$; the source's dimension d also obstructs a linear tube bound.",
+      "section": "4",
+      "branch": "discrepancy",
+      "origin": "In-text supporting step",
+      "tex_label": null,
+      "source": {
+        "lines": [
+          931,
+          941
+        ]
+      },
+      "equations": [],
+      "references": [],
+      "notes": [
+        "The domain closure lies strictly inside the unit square, so sufficiently small Euclidean neighborhoods project injectively.",
+        "Uses the construction and dimension from LP; no convex-set Fourier or tube estimate is applied.",
+        "The two conclusions in Remark 4.7 use this upper tube estimate and the dimension information in different directions."
+      ],
+      "certification_status": "pending"
+    },
+    {
+      "id": "external:BRS-section-3-1",
+      "kind": "external",
+      "title": "Definition of well-shaped sets",
+      "short_title": "BRS Section 3.1",
+      "branch": "external",
+      "origin": "Cited definition",
+      "references": [
+        {
+          "bibkey": "BRS",
+          "locator": "Section 3.1",
+          "role": "Euclidean inner/outer neighborhood definition"
+        }
+      ],
+      "source": {
+        "citation_lines": [
+          914,
+          918
+        ]
+      },
+      "notes": [
+        "This node imports a definition. It does not import the earlier discrepancy bound or the assertion that convex sets are well-shaped."
+      ],
+      "trust_status": "trusted_literature_input",
+      "summary": "Definition of well-shaped sets"
+    },
+    {
+      "id": "external:LP-section-1",
+      "kind": "external",
+      "title": "Koch construction and Minkowski dimension",
+      "short_title": "LP Section 1",
+      "branch": "external",
+      "origin": "Cited input",
+      "references": [
+        {
+          "bibkey": "LP",
+          "locator": "Section 1",
+          "role": "Koch curve, complementary domain, construction arcs and dimension"
+        }
+      ],
+      "source": {
+        "citation_lines": [
+          931,
+          931
+        ]
+      },
+      "notes": [
+        "The cited facts are treated as trusted inputs for this inventory; no new source audit is claimed."
+      ],
+      "trust_status": "trusted_literature_input",
+      "summary": "Koch construction and Minkowski dimension"
+    },
+    {
+      "id": "step:difference-convex-proof",
+      "kind": "auxiliary",
+      "title": "Convex difference estimate from pointwise brackets and squared shells",
+      "short_title": "Convex difference component",
+      "summary": "Bracket the convex indicator pointwise, use the nonnegative coefficients $|a_X(k)|^2$ in the difference identity, sum the squared shell estimates, and take $\\delta=(8X)^{-1}$ to obtain the convex clause of Theorem 1.5.",
+      "section": "5",
+      "branch": "local_statistics",
+      "origin": "In-text supporting step",
+      "tex_label": null,
+      "source": {
+        "lines": [
+          956,
+          979
+        ]
+      },
+      "equations": [
+        {
+          "label": "eq:difference-reduction",
+          "number": "5.1"
+        },
+        {
+          "label": "eq:difference-convex",
+          "number": "1.9"
+        }
+      ],
+      "references": [],
+      "notes": [
+        "Proposition 4.2 supplies the earlier pattern of the smoothing reduction, but its numerical discrepancy estimate is not a proof input here."
+      ],
+      "certification_status": "pending"
+    },
+    {
+      "id": "step:arc-indicator-coefficients",
+      "kind": "auxiliary",
+      "title": "Fourier coefficients of an arc indicator",
+      "short_title": "Arc coefficient calculation",
+      "summary": "Direct integration gives the nonzero coefficient of an arc indicator as an endpoint exponential difference divided by $2\\pi i m$. Its modulus is bounded by the smaller of the arc length and $(\\pi|m|)^{-1}$; the zero coefficient is the length.",
+      "section": "5",
+      "branch": "local_statistics",
+      "origin": "In-text supporting step",
+      "tex_label": null,
+      "source": {
+        "lines": [
+          990,
+          994
+        ]
+      },
+      "equations": [],
+      "references": [],
+      "notes": [
+        "This shared calculation is used in the bracket proof and, without smoothing, in the rectangle variance proof."
+      ],
+      "certification_status": "pending"
+    },
+    {
+      "id": "step:difference-box-proof",
+      "kind": "auxiliary",
+      "title": "Product brackets and separate frequency summation for differences",
+      "short_title": "Rectangle difference component",
+      "summary": "Use products of arc brackets and dyadic blocks in each frequency separately. Proposition 2.3 and the resulting one-variable sums, with $\\delta=(16X^2)^{-1}$, give the area-dependent rectangle clause of Theorem 1.5.",
+      "section": "5",
+      "branch": "local_statistics",
+      "origin": "In-text supporting step",
+      "tex_label": null,
+      "source": {
+        "lines": [
+          997,
+          1031
+        ]
+      },
+      "equations": [
+        {
+          "label": "eq:box-reduction",
+          "number": "5.3"
+        },
+        {
+          "label": "eq:difference-box",
+          "number": "1.10"
+        }
+      ],
+      "references": [],
+      "notes": [
+        "The frequency blocks and factorized summation are later reused as a method in the rectangle variance proof."
+      ],
+      "certification_status": "pending"
+    },
+    {
+      "id": "eq:diagonal-removal",
+      "kind": "auxiliary",
+      "title": "Removing equal-point pairs",
+      "short_title": "Diagonal removal",
+      "summary": "The exact relation $\\nu_X=(1-N_X^{-1})\\nu_X^*+N_X^{-1}\\delta_0$ implies that the two probability measures differ on any measurable set by at most $N_X^{-1}\\ll X^{-2}$.",
+      "section": "5",
+      "branch": "local_statistics",
+      "origin": "In-text supporting step",
+      "tex_label": "eq:diagonal-removal",
+      "source": {
+        "lines": [
+          1033,
+          1040
+        ]
+      },
+      "equations": [
+        {
+          "label": "eq:diagonal-removal",
+          "number": "5.4"
+        }
+      ],
+      "references": [],
+      "notes": [
+        "The identity is independent of Theorem 1.5; combining them gives its distinct-pair extension."
+      ],
+      "certification_status": "pending"
+    },
+    {
+      "id": "step:variance-convex-proof",
+      "kind": "auxiliary",
+      "title": "Convex variance from Fourier tails and squared shells",
+      "short_title": "Convex variance component",
+      "summary": "Handle sets below the one-point threshold by the exact identity. Otherwise split at frequency $T=X^2/P$, use the convex Fourier tail above $T$, and pair the pointwise coefficient bound with the squared shell estimate below $T$.",
+      "section": "5",
+      "branch": "local_statistics",
+      "origin": "In-text supporting step",
+      "tex_label": null,
+      "source": {
+        "lines": [
+          1088,
+          1104
+        ]
+      },
+      "equations": [
+        {
+          "label": "eq:variance-convex",
+          "number": "1.12"
+        }
+      ],
+      "references": [],
+      "notes": [
+        "The proof uses both clauses of Lemma 2.7 concerning Fourier coefficients, together with the elementary perimeter and width bounds."
+      ],
+      "certification_status": "pending"
+    },
+    {
+      "id": "step:variance-disc-proof",
+      "kind": "auxiliary",
+      "title": "Disc variance as a convex-set specialization",
+      "short_title": "Disc variance component",
+      "summary": "Apply the established convex variance estimate with area $\\pi r^2$ and perimeter $2\\pi r$; discs of radius at most $1/4$ fit in a translated unit square.",
+      "section": "5",
+      "branch": "local_statistics",
+      "origin": "In-text supporting step",
+      "tex_label": null,
+      "source": {
+        "lines": [
+          1106,
+          1106
+        ]
+      },
+      "equations": [
+        {
+          "label": "eq:variance-disc",
+          "number": "1.14"
+        }
+      ],
+      "references": [],
+      "notes": [],
+      "certification_status": "pending"
+    },
+    {
+      "id": "step:variance-box-proof",
+      "kind": "auxiliary",
+      "title": "Rectangle variance from squared arc coefficients",
+      "short_title": "Rectangle variance component",
+      "summary": "Use the one-point identity for a side below $X^{-2}$. Otherwise factor the squared indicator coefficients, sum separate frequency blocks against Proposition 2.3, and split the one-variable sums at the reciprocal side lengths.",
+      "section": "5",
+      "branch": "local_statistics",
+      "origin": "In-text supporting step",
+      "tex_label": null,
+      "source": {
+        "lines": [
+          1108,
+          1114
+        ]
+      },
+      "equations": [
+        {
+          "label": "eq:variance-box",
+          "number": "1.13"
+        }
+      ],
+      "references": [],
+      "notes": [
+        "The formula for raw arc coefficients comes from the calculation in Lemma 5.1's proof; the smooth bracket estimate itself is not needed.",
+        "The numerical difference estimate is not used."
+      ],
+      "certification_status": "pending"
+    },
+    {
+      "id": "eq:FX",
+      "kind": "auxiliary",
+      "title": "An explicit empty rectangle at scale X to the minus one half",
+      "short_title": "Empty rectangle",
+      "summary": "For $X>9$, the rectangle $[2X^{-1/2},3X^{-1/2}]\\times[\\tfrac15X^{-1/2},\\tfrac14X^{-1/2}]$ has area $1/(20X)$ and contains no modular-inverse point. The proof separates points with $ab=1$ from those with $ab=1+jc$, $j\\ge1$.",
+      "section": "1",
+      "branch": "distance",
+      "origin": "In-text supporting step",
+      "tex_label": "eq:FX",
+      "source": {
+        "lines": [
+          225,
+          229
+        ]
+      },
+      "equations": [
+        {
+          "label": "eq:FX",
+          "number": "1.6"
+        }
+      ],
+      "references": [
+        {
+          "bibkey": "BRS",
+          "locator": "Section 1.2",
+          "role": "method origin; explicit case proved in v39"
+        }
+      ],
+      "notes": [
+        "BRS Section 1.2 is credited for the empty-box construction; this particular rectangle is verified directly in v39.",
+        "This node is a proof input for the distance lower bound and also explains the uniform shrinking-set obstruction."
+      ],
+      "certification_status": "pending"
+    },
+    {
+      "id": "eq:distance-tail",
+      "kind": "auxiliary",
+      "title": "Distance tail from the disc variance",
+      "short_title": "Distance tail",
+      "summary": "An empty disc forces normalized-count deviation $\\pi r^2$. Chebyshev's inequality and the disc variance therefore bound the measure of $\\{d_X>r\\}$ by $\\ll_\\varepsilon X^\\varepsilon(X^{-2}r^{-2}+X^{-5/3}r^{-2/3})$ for $0<r\\le1/4$.",
+      "section": "5",
+      "branch": "distance",
+      "origin": "In-text supporting step",
+      "tex_label": "eq:distance-tail",
+      "source": {
+        "lines": [
+          1170,
+          1173
+        ]
+      },
+      "equations": [
+        {
+          "label": "eq:distance-tail",
+          "number": "5.7"
+        }
+      ],
+      "references": [],
+      "notes": [],
+      "certification_status": "pending"
+    },
+    {
+      "id": "eq:distance-max",
+      "kind": "auxiliary",
+      "title": "Uniform distance cutoff from shrinking-set equidistribution",
+      "short_title": "Distance cutoff",
+      "summary": "For any fixed $0<\\kappa\\le1/4$ and sufficiently large $X$, Corollary 1.3 ensures that every disc of radius $X^{-1/2+\\kappa}$ contains a point. Hence $d_X(u)<X^{-1/2+\\kappa}$ for every center.",
+      "section": "5",
+      "branch": "distance",
+      "origin": "In-text supporting step",
+      "tex_label": "eq:distance-max",
+      "source": {
+        "lines": [
+          1174,
+          1177
+        ]
+      },
+      "equations": [
+        {
+          "label": "eq:distance-max",
+          "number": "5.8"
+        }
+      ],
+      "references": [],
+      "notes": [
+        "This is an actual dependence on Corollary 1.3, not an elementary Farey covering argument."
+      ],
+      "certification_status": "pending"
+    },
+    {
+      "id": "step:distance-upper",
+      "kind": "auxiliary",
+      "title": "Integrating the distance tail up to its uniform cutoff",
+      "short_title": "Distance upper bound",
+      "summary": "Use the layer-cake formula, the trivial tail bound below $X^{-1}$, the variance tail up to $X^{-1/2+\\kappa}$, and the vanishing tail beyond it. The integral of $r^{s-3}$ produces the three cases $s<2$, $s=2$, and $s>2$.",
+      "section": "5",
+      "branch": "distance",
+      "origin": "In-text supporting step",
+      "tex_label": null,
+      "source": {
+        "lines": [
+          1179,
+          1187
+        ]
+      },
+      "equations": [],
+      "references": [],
+      "notes": [
+        "At $s=2$ the integration produces a logarithm which is absorbed together with the pre-existing epsilon loss; no exact logarithmic order is established."
+      ],
+      "certification_status": "pending"
+    },
+    {
+      "id": "step:distance-lower",
+      "kind": "auxiliary",
+      "title": "Packing and the empty rectangle give the two distance lower bounds",
+      "short_title": "Distance lower bounds",
+      "summary": "A union of $N_X$ discs covering at most half the torus gives a lower bound $\\gg_sX^{-s}$. The middle quarter of the explicit empty rectangle has measure $\\asymp X^{-1}$ and distance $\\gg X^{-1/2}$ from the point set, giving $\\gg_sX^{-1-s/2}$.",
+      "section": "5",
+      "branch": "distance",
+      "origin": "In-text supporting step",
+      "tex_label": null,
+      "source": {
+        "lines": [
+          1189,
+          1197
+        ]
+      },
+      "equations": [],
+      "references": [],
+      "notes": [
+        "The packing estimate only needs the elementary inequality $N_X\\le X^2$, proved in the displayed argument; it does not require Mertens's asymptotic."
+      ],
+      "certification_status": "pending"
+    },
+    {
+      "id": "external:BRS-section-1-2",
+      "kind": "external",
+      "title": "Empty boxes and cutoff effects in BRS",
+      "short_title": "BRS, Section 1.2",
+      "summary": "BRS Section 1.2 supplies the credited empty-box construction and the contextual discussion of smoothing the modulus cutoff.",
+      "branch": "literature",
+      "origin": "Trusted cited literature",
+      "tex_label": null,
+      "references": [
+        {
+          "bibkey": "BRS",
+          "locator": "Section 1.2"
+        }
+      ],
+      "trust_status": "trusted_literature_input",
+      "notes": [
+        "The edge to the explicitly verified rectangle is method attribution. The local-statistics proof does not import the emptiness of this particular rectangle as an unproved external assertion."
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "from": "external:BRS-theorem-1-3",
+      "to": "thm:brs-input",
+      "relation": "literature",
+      "reason": "BRS Theorem 1.3 supplies the fixed-height dyadic frequency moment; Section 2.1 supplies the small-power convention.",
+      "source_lines": [
+        383,
+        383
+      ]
+    },
+    {
+      "from": "thm:brs-input",
+      "to": "cor:brs-cumulative",
+      "relation": "proof",
+      "reason": "Sum the input over the dyadic ranges 2^j≤|r|<2^(j+1), including the final block when R is a power of two.",
+      "source_lines": [
+        392,
+        396
+      ]
+    },
+    {
+      "from": "external:Xi-selberg-identity",
+      "to": "eq:selberg",
+      "relation": "literature",
+      "reason": "The cited elementary proof supplies Selberg's identity; the manuscript also records Selberg's attribution and Kuznetsov as a proof reference.",
+      "source_lines": [
+        401,
+        405
+      ]
+    },
+    {
+      "from": "eq:selberg",
+      "to": "eq:selberg-summed",
+      "relation": "proof",
+      "reason": "Sum over c≤X and write c=dℓ, restricting d≤X.",
+      "source_lines": [
+        405,
+        408
+      ]
+    },
+    {
+      "from": "external:IK-equation-1-81",
+      "to": "step:divisor-small-power",
+      "relation": "literature",
+      "reason": "Equation (1.81) supplies τ(v)≪ηv^η.",
+      "source_lines": [
+        417,
+        417
+      ]
+    },
+    {
+      "from": "eq:selberg-summed",
+      "to": "step:rectangular-divisor-reduction",
+      "relation": "proof",
+      "reason": "Apply Cauchy–Schwarz to the divisor sum before summing over off-axis frequencies.",
+      "source_lines": [
+        419,
+        426
+      ]
+    },
+    {
+      "from": "step:divisor-small-power",
+      "to": "step:rectangular-divisor-reduction",
+      "relation": "proof",
+      "reason": "Bound the number of divisors and the at most 2τ(|r|) signed factorizations uv=r.",
+      "source_lines": [
+        423,
+        426
+      ]
+    },
+    {
+      "from": "cor:brs-cumulative",
+      "to": "step:rectangular-divisor-reduction",
+      "relation": "proof",
+      "reason": "Use R=MN/d²≥1 and Y=X/d≥1; the remaining d-weights are d^−2 and d^−1.",
+      "source_lines": [
+        428,
+        435
+      ]
+    },
+    {
+      "from": "external:IK-equation-3-2",
+      "to": "step:axis-ramanujan-bound",
+      "relation": "literature",
+      "reason": "Equation (3.2) gives the Ramanujan-sum divisor formula; the manuscript also indicates its elementary Möbius-inversion derivation.",
+      "source_lines": [
+        437,
+        443
+      ]
+    },
+    {
+      "from": "step:kloosterman-symmetries",
+      "to": "step:axis-ramanujan-bound",
+      "relation": "proof",
+      "reason": "Interchange the frequency arguments to obtain the same bound on the second axis.",
+      "source_lines": [
+        444,
+        444
+      ]
+    },
+    {
+      "from": "step:divisor-small-power",
+      "to": "step:axis-ramanujan-bound",
+      "relation": "proof",
+      "reason": "After |A_X(0,n)|≤Xτ(|n|), sum the squared divisor estimate on both axes.",
+      "source_lines": [
+        444,
+        447
+      ]
+    },
+    {
+      "from": "step:rectangular-divisor-reduction",
+      "to": "prop:rectangular",
+      "relation": "proof",
+      "reason": "Supplies the off-axis bound; its logarithm is absorbed by choosing η=ε/4.",
+      "source_lines": [
+        449,
+        449
+      ]
+    },
+    {
+      "from": "step:axis-ramanujan-bound",
+      "to": "prop:rectangular",
+      "relation": "proof",
+      "reason": "Add both axis contributions to the off-axis estimate.",
+      "source_lines": [
+        449,
+        449
+      ]
+    },
+    {
+      "from": "external:HW-theorem-330",
+      "to": "step:cardinality-comparison",
+      "relation": "literature",
+      "reason": "Theorem 330 supplies the summatory totient asymptotic used to normalize the point-set coefficients.",
+      "source_lines": [
+        155,
+        159
+      ]
+    },
+    {
+      "from": "eq:point-fourier",
+      "to": "step:normalized-coefficient-bound",
+      "relation": "proof",
+      "reason": "Divide the finite exponential sum by its number of unit-modulus summands.",
+      "source_lines": [
+        364,
+        374
+      ]
+    },
+    {
+      "from": "prop:rectangular",
+      "to": "cor:shell",
+      "relation": "proof",
+      "reason": "Enclose the shell in the rectangle M=N=2H and take the square root after normalization.",
+      "source_lines": [
+        466,
+        470
+      ]
+    },
+    {
+      "from": "step:cardinality-comparison",
+      "to": "cor:shell",
+      "relation": "proof",
+      "reason": "Divide by N_X²≫X⁴ in the shell second moment.",
+      "source_lines": [
+        452,
+        470
+      ]
+    },
+    {
+      "from": "step:normalized-coefficient-bound",
+      "to": "cor:shell",
+      "relation": "proof",
+      "reason": "Supplies the stated pointwise bound 0≤|a_X(k)|²≤1.",
+      "source_lines": [
+        470,
+        470
+      ]
+    },
+    {
+      "from": "external:Grafakos-section-3-2-2",
+      "to": "lem:translation",
+      "relation": "literature",
+      "reason": "Parseval converts the L² translation norm into a nonnegative Fourier multiplier sum.",
+      "source_lines": [
+        493,
+        496
+      ]
+    },
+    {
+      "from": "step:fourier-translation-rule",
+      "to": "lem:translation",
+      "relation": "proof",
+      "reason": "Identifies the multiplier |e(k·h)−1|² before averaging over the square Q_H.",
+      "source_lines": [
+        493,
+        505
+      ]
+    },
+    {
+      "from": "eq:mollifier-decay",
+      "to": "lem:brackets",
+      "relation": "proof",
+      "reason": "Defines the positive normalized smooth mollifier, gives pointwise enclosure, and supplies the Fourier cutoff factor.",
+      "source_lines": [
+        547,
+        565
+      ]
+    },
+    {
+      "from": "step:boundary-crossing",
+      "to": "eq:bracket-difference-norms",
+      "relation": "proof",
+      "reason": "Both smoothing-set differences are supported in the 3δ boundary neighborhood.",
+      "source_lines": [
+        555,
+        558
+      ]
+    },
+    {
+      "from": "eq:bracket-difference-norms",
+      "to": "lem:brackets",
+      "relation": "proof",
+      "reason": "Controls the integral error and both the L¹ Fourier-coefficient error and L² Fourier-energy error.",
+      "source_lines": [
+        559,
+        569
+      ]
+    },
+    {
+      "from": "external:Grafakos-section-3-1-2",
+      "to": "lem:brackets",
+      "relation": "literature",
+      "reason": "Fourier coefficients of the convolution are products of the mollifier and set coefficients.",
+      "source_lines": [
+        561,
+        563
+      ]
+    },
+    {
+      "from": "external:Grafakos-section-3-2-2",
+      "to": "lem:brackets",
+      "relation": "literature",
+      "reason": "Converts the full Fourier energy of the difference indicator into its L² norm.",
+      "source_lines": [
+        567,
+        569
+      ]
+    },
+    {
+      "from": "step:convex-boundary-geometry",
+      "to": "eq:convex-tube",
+      "relation": "proof",
+      "reason": "Cover the rectifiable boundary by short arcs and project the Euclidean tube to the torus.",
+      "source_lines": [
+        593,
+        597
+      ]
+    },
+    {
+      "from": "step:convex-boundary-geometry",
+      "to": "eq:convex-translation",
+      "relation": "proof",
+      "reason": "Uses the convex boundary's perimeter and nullness to justify slicing and periodization of the closure.",
+      "source_lines": [
+        599,
+        608
+      ]
+    },
+    {
+      "from": "step:indicator-translation-norms",
+      "to": "eq:convex-translation",
+      "relation": "proof",
+      "reason": "Identifies the desired squared L² norm with the symmetric-difference measure.",
+      "source_lines": [
+        603,
+        608
+      ]
+    },
+    {
+      "from": "eq:convex-translation",
+      "to": "eq:convex-tail",
+      "relation": "proof",
+      "reason": "Supplies the translation hypothesis with α=1 and Λ=P.",
+      "source_lines": [
+        610,
+        610
+      ]
+    },
+    {
+      "from": "lem:translation",
+      "to": "eq:convex-tail",
+      "relation": "proof",
+      "reason": "Converts that translation estimate into the lattice Fourier-energy tail.",
+      "source_lines": [
+        610,
+        610
+      ]
+    },
+    {
+      "from": "eq:convex-translation",
+      "to": "eq:convex-pointwise",
+      "relation": "proof",
+      "reason": "The special shift h=k/(2|k|₂²) bounds the L¹ difference by P/(2|k|₂).",
+      "source_lines": [
+        612,
+        612
+      ]
+    },
+    {
+      "from": "step:fourier-translation-rule",
+      "to": "eq:convex-pointwise",
+      "relation": "proof",
+      "reason": "The selected shift makes the Fourier multiplier exactly −2.",
+      "source_lines": [
+        612,
+        612
+      ]
+    },
+    {
+      "from": "step:indicator-translation-norms",
+      "to": "eq:convex-pointwise",
+      "relation": "proof",
+      "reason": "The squared L² translation bound also controls the L¹ norm needed for a single coefficient.",
+      "source_lines": [
+        612,
+        612
+      ]
+    },
+    {
+      "from": "eq:convex-tube",
+      "to": "lem:convex-geometry",
+      "relation": "proof",
+      "reason": "Supplies the boundary-neighborhood estimate (2.17), including degenerate cases.",
+      "source_lines": [
+        588,
+        615
+      ]
+    },
+    {
+      "from": "eq:convex-translation",
+      "to": "lem:convex-geometry",
+      "relation": "proof",
+      "reason": "Supplies the symmetric-difference estimate (2.18), including degenerate cases.",
+      "source_lines": [
+        588,
+        615
+      ]
+    },
+    {
+      "from": "eq:convex-tail",
+      "to": "lem:convex-geometry",
+      "relation": "proof",
+      "reason": "Supplies the Fourier tail (2.19) and its shell consequence.",
+      "source_lines": [
+        588,
+        615
+      ]
+    },
+    {
+      "from": "eq:convex-pointwise",
+      "to": "lem:convex-geometry",
+      "relation": "proof",
+      "reason": "Supplies the area/perimeter coefficient bound (2.20).",
+      "source_lines": [
+        588,
+        615
+      ]
+    },
+    {
+      "from": "lem:brackets",
+      "to": "cor:convex-brackets",
+      "relation": "proof",
+      "reason": "Use the pointwise brackets, integral-error bound, and two Fourier bounds.",
+      "source_lines": [
+        617,
+        628
+      ]
+    },
+    {
+      "from": "lem:convex-geometry",
+      "to": "cor:convex-brackets",
+      "relation": "proof",
+      "reason": "Insert specifically (2.17), (2.19), and (2.20) into the bracket bounds, with s=3δ≤1.",
+      "source_lines": [
+        628,
+        628
+      ]
+    },
+    {
+      "from": "step:boundary-crossing",
+      "to": "rem:tube-to-translation",
+      "relation": "proof",
+      "reason": "Bounds a translation symmetric difference by an arbitrarily slightly larger boundary neighborhood; subdivision removes the quadratic term.",
+      "source_lines": [
+        632,
+        632
+      ]
+    },
+    {
+      "from": "lem:brackets",
+      "to": "rem:tube-to-translation",
+      "relation": "method",
+      "reason": "The remark explicitly reuses the boundary-crossing path argument from the proof of Lemma 2.6.",
+      "source_lines": [
+        632,
+        632
+      ]
+    },
+    {
+      "from": "external:Grafakos-sections-3-3-2-and-3-3-3",
+      "to": "eq:identity-mu",
+      "relation": "literature",
+      "reason": "Absolutely convergent pointwise smooth Fourier inversion justifies summation over the finite point set.",
+      "source_lines": [
+        662,
+        666
+      ]
+    },
+    {
+      "from": "eq:point-fourier",
+      "to": "eq:identity-mu",
+      "relation": "proof",
+      "reason": "Identifies each finite exponential sum with N_Xa_X(k).",
+      "source_lines": [
+        662,
+        666
+      ]
+    },
+    {
+      "from": "step:normalized-coefficient-bound",
+      "to": "eq:identity-mu",
+      "relation": "proof",
+      "reason": "The zero coefficient is a_X(0)=1; |a_X(k)|≤1 also preserves absolute convergence.",
+      "source_lines": [
+        662,
+        666
+      ]
+    },
+    {
+      "from": "external:Grafakos-sections-3-3-2-and-3-3-3",
+      "to": "eq:identity-nu",
+      "relation": "literature",
+      "reason": "Apply the same smooth Fourier inversion to the finite difference average.",
+      "source_lines": [
+        668,
+        672
+      ]
+    },
+    {
+      "from": "eq:point-fourier",
+      "to": "eq:identity-nu",
+      "relation": "proof",
+      "reason": "Factor the double exponential sum into a_X(k) times its complex conjugate.",
+      "source_lines": [
+        668,
+        672
+      ]
+    },
+    {
+      "from": "step:normalized-coefficient-bound",
+      "to": "eq:identity-nu",
+      "relation": "proof",
+      "reason": "The zero-frequency term is the integral and the weighted series is absolutely convergent.",
+      "source_lines": [
+        668,
+        672
+      ]
+    },
+    {
+      "from": "external:Grafakos-section-3-2-2",
+      "to": "eq:identity-variance",
+      "relation": "literature",
+      "reason": "Apply Parseval to the bounded measurable finite reflected-translate sum Z_E.",
+      "source_lines": [
+        674,
+        683
+      ]
+    },
+    {
+      "from": "eq:point-fourier",
+      "to": "eq:identity-variance",
+      "relation": "proof",
+      "reason": "Identifies its nonzero Fourier coefficients as a_X(−k) times the reflected indicator coefficient.",
+      "source_lines": [
+        674,
+        679
+      ]
+    },
+    {
+      "from": "step:normalized-coefficient-bound",
+      "to": "eq:identity-variance",
+      "relation": "proof",
+      "reason": "Controls the variance series by the indicator's L² Fourier energy.",
+      "source_lines": [
+        657,
+        657
+      ]
+    },
+    {
+      "from": "eq:identity-mu",
+      "to": "prop:identities",
+      "relation": "proof",
+      "reason": "Supplies the corresponding separately proved component of the proposition.",
+      "source_lines": [
+        661,
+        684
+      ]
+    },
+    {
+      "from": "eq:identity-nu",
+      "to": "prop:identities",
+      "relation": "proof",
+      "reason": "Supplies the corresponding separately proved component of the proposition.",
+      "source_lines": [
+        661,
+        684
+      ]
+    },
+    {
+      "from": "eq:identity-variance",
+      "to": "prop:identities",
+      "relation": "proof",
+      "reason": "Supplies the corresponding separately proved component of the proposition.",
+      "source_lines": [
+        661,
+        684
+      ]
+    },
+    {
+      "from": "eq:identity-variance",
+      "to": "step:variance-null-set-invariance",
+      "relation": "proof",
+      "reason": "Fourier coefficients of the indicator depend only on its L² class.",
+      "source_lines": [
+        686,
+        686
+      ]
+    },
+    {
+      "from": "lem:brackets",
+      "to": "step:pointwise-discrepancy-reduction",
+      "relation": "proof",
+      "reason": "Pointwise brackets compare the atomic count with the two smooth counts.",
+      "source_lines": [
+        743,
+        750
+      ]
+    },
+    {
+      "from": "prop:identities",
+      "to": "step:pointwise-discrepancy-reduction",
+      "relation": "proof",
+      "reason": "Use Proposition 3.1(i), the smooth counting identity (3.1), for each bracket.",
+      "source_lines": [
+        743,
+        750
+      ]
+    },
+    {
+      "from": "step:pointwise-discrepancy-reduction",
+      "to": "prop:smoothing",
+      "relation": "proof",
+      "reason": "Reduce convex discrepancy to bracket Fourier sums and the integral errors.",
+      "source_lines": [
+        743,
+        750
+      ]
+    },
+    {
+      "from": "cor:convex-brackets",
+      "to": "prop:smoothing",
+      "relation": "proof",
+      "reason": "Supplies the convex integral error and shell Fourier norm of the brackets.",
+      "source_lines": [
+        743,
+        764
+      ]
+    },
+    {
+      "from": "cor:shell",
+      "to": "prop:smoothing",
+      "relation": "proof",
+      "reason": "Supplies the normalized arithmetic shell norm paired by Cauchy-Schwarz.",
+      "source_lines": [
+        752,
+        758
+      ]
+    },
+    {
+      "from": "lem:dyadic",
+      "to": "prop:smoothing",
+      "relation": "proof",
+      "reason": "Sum the four shell contributions, whose exponents stay away from zero in this convex calculation.",
+      "source_lines": [
+        760,
+        764
+      ]
+    },
+    {
+      "from": "prop:smoothing",
+      "to": "thm:perimeter",
+      "relation": "proof",
+      "reason": "Choose delta according to the large- and small-perimeter regimes and absorb the small powers.",
+      "source_lines": [
+        772,
+        790
+      ]
+    },
+    {
+      "from": "lem:convex-geometry",
+      "to": "thm:perimeter",
+      "relation": "proof",
+      "reason": "The proof's bound P<=4 controls the small-power factor in the large-perimeter regime.",
+      "source_lines": [
+        782,
+        782
+      ]
+    },
+    {
+      "from": "thm:perimeter",
+      "to": "cor:isotropic",
+      "relation": "proof",
+      "reason": "Take the uniform supremum over convex sets after bounding their perimeter.",
+      "source_lines": [
+        794,
+        794
+      ]
+    },
+    {
+      "from": "lem:convex-geometry",
+      "to": "cor:isotropic",
+      "relation": "proof",
+      "reason": "Use the perimeter bound P<=4 established in Lemma 2.7's proof.",
+      "source_lines": [
+        794,
+        794
+      ]
+    },
+    {
+      "from": "thm:perimeter",
+      "to": "cor:shrinking",
+      "relation": "proof",
+      "reason": "Divide its discrepancy estimate by the scaled area and take eta=kappa/3.",
+      "source_lines": [
+        798,
+        802
+      ]
+    },
+    {
+      "from": "step:coordinate-counting",
+      "to": "prop:coordinate-separation",
+      "relation": "proof",
+      "reason": "Count lifted points using each coordinate width.",
+      "source_lines": [
+        816,
+        824
+      ]
+    },
+    {
+      "from": "step:cardinality-comparison",
+      "to": "prop:coordinate-separation",
+      "relation": "proof",
+      "reason": "The lower bound N_X>>X^2 normalizes the coordinate count.",
+      "source_lines": [
+        820,
+        822
+      ]
+    },
+    {
+      "from": "prop:coordinate-separation",
+      "to": "eq:combined-small",
+      "relation": "proof",
+      "reason": "Supplies the width-sensitive elementary bound.",
+      "source_lines": [
+        827,
+        830
+      ]
+    },
+    {
+      "from": "thm:perimeter",
+      "to": "eq:combined-small",
+      "relation": "proof",
+      "reason": "Supplies the second estimate whose minimum is taken.",
+      "source_lines": [
+        827,
+        830
+      ]
+    },
+    {
+      "from": "prop:coordinate-separation",
+      "to": "cor:small-perimeter-sharp",
+      "relation": "proof",
+      "reason": "Gives the upper bound uniformly for perimeter at most p.",
+      "source_lines": [
+        845,
+        845
+      ]
+    },
+    {
+      "from": "step:cardinality-upper",
+      "to": "step:short-perimeter-diagonal-lower",
+      "relation": "proof",
+      "reason": "Normalize the explicit segment count with N_X<=X^2.",
+      "source_lines": [
+        853,
+        855
+      ]
+    },
+    {
+      "from": "step:short-perimeter-diagonal-lower",
+      "to": "cor:small-perimeter-sharp",
+      "relation": "proof",
+      "reason": "Supplies the matching lower bound, including p=0 and real X.",
+      "source_lines": [
+        845,
+        857
+      ]
+    },
+    {
+      "from": "step:cardinality-upper",
+      "to": "rem:positive-area",
+      "relation": "proof",
+      "reason": "The thin rectangle contains order-X reciprocal points, so their normalized mass is of order at least X^-1.",
+      "source_lines": [
+        861,
+        865
+      ]
+    },
+    {
+      "from": "rem:tube-to-translation",
+      "to": "step:boundary-fourier-control",
+      "relation": "method",
+      "reason": "Reuse only the boundary-crossing argument; the alpha-power translation estimate is derived here, without invoking the remark's linear conclusion.",
+      "source_lines": [
+        870,
+        873
+      ]
+    },
+    {
+      "from": "lem:translation",
+      "to": "step:boundary-fourier-control",
+      "relation": "proof",
+      "reason": "Convert the alpha-power translation estimate to Fourier shell control with its explicit uniform constant.",
+      "source_lines": [
+        873,
+        877
+      ]
+    },
+    {
+      "from": "lem:brackets",
+      "to": "step:boundary-fourier-control",
+      "relation": "proof",
+      "reason": "Use the integral-error and shell-energy bounds of the brackets.",
+      "source_lines": [
+        877,
+        881
+      ]
+    },
+    {
+      "from": "lem:dyadic",
+      "to": "step:boundary-uniform-dyadic",
+      "relation": "proof",
+      "reason": "Use the compact-range uniform bound explicitly established in the lemma's proof for the three safe exponents; derive the remaining near-zero case separately.",
+      "source_lines": [
+        888,
+        892
+      ]
+    },
+    {
+      "from": "step:pointwise-discrepancy-reduction",
+      "to": "eq:general-smoothing",
+      "relation": "proof",
+      "reason": "Apply the same valid generic bracket reduction with the new boundary integral error.",
+      "source_lines": [
+        883,
+        883
+      ]
+    },
+    {
+      "from": "step:boundary-fourier-control",
+      "to": "eq:general-smoothing",
+      "relation": "proof",
+      "reason": "Supplies the set-dependent shell norm and the boundary approximation error.",
+      "source_lines": [
+        883,
+        886
+      ]
+    },
+    {
+      "from": "cor:shell",
+      "to": "eq:general-smoothing",
+      "relation": "proof",
+      "reason": "Pair the bracket shell norm with the arithmetic shell norm by Cauchy-Schwarz.",
+      "source_lines": [
+        883,
+        886
+      ]
+    },
+    {
+      "from": "step:boundary-uniform-dyadic",
+      "to": "eq:general-smoothing",
+      "relation": "proof",
+      "reason": "Sum uniformly through the possible zero exponent and retain the necessary logarithmic factor.",
+      "source_lines": [
+        888,
+        896
+      ]
+    },
+    {
+      "from": "eq:general-smoothing",
+      "to": "thm:boundary",
+      "relation": "proof",
+      "reason": "Optimize delta and bound the remaining terms uniformly in alpha and B; treat B>=X^alpha trivially.",
+      "source_lines": [
+        898,
+        911
+      ]
+    },
+    {
+      "from": "external:BRS-section-3-1",
+      "to": "step:well-shaped-torus-tube",
+      "relation": "literature",
+      "reason": "Use BRS's Euclidean definition of gamma-well-shapedness; the torus tube estimate itself is proved here.",
+      "source_lines": [
+        914,
+        927
+      ]
+    },
+    {
+      "from": "step:well-shaped-torus-tube",
+      "to": "cor:well-shaped",
+      "relation": "proof",
+      "reason": "Verifies the boundary theorem's hypothesis with alpha=1 and B=8(1+gamma).",
+      "source_lines": [
+        927,
+        927
+      ]
+    },
+    {
+      "from": "thm:boundary",
+      "to": "cor:well-shaped",
+      "relation": "proof",
+      "reason": "Apply the boundary theorem to the verified linear torus tube bound.",
+      "source_lines": [
+        927,
+        927
+      ]
+    },
+    {
+      "from": "external:LP-section-1",
+      "to": "step:koch-tube",
+      "relation": "literature",
+      "reason": "Use the Koch construction arcs and Minkowski dimension from LP Section 1.",
+      "source_lines": [
+        931,
+        941
+      ]
+    },
+    {
+      "from": "step:koch-tube",
+      "to": "rem:koch",
+      "relation": "proof",
+      "reason": "The tube upper estimate supplies alpha=2-d, while the dimension information rules out linear tube growth.",
+      "source_lines": [
+        931,
+        941
+      ]
+    },
+    {
+      "from": "thm:boundary",
+      "to": "rem:koch",
+      "relation": "proof",
+      "reason": "Apply the theorem to the snowflake boundary tube estimate.",
+      "source_lines": [
+        937,
+        939
+      ]
+    },
+    {
+      "from": "step:well-shaped-torus-tube",
+      "to": "rem:koch",
+      "relation": "proof",
+      "reason": "Any gamma-well-shaped set would satisfy the linear tube bound already proved for Corollary 4.6; the dimension contradicts it.",
+      "source_lines": [
+        941,
+        941
+      ]
+    },
+    {
+      "from": "lem:brackets",
+      "to": "step:difference-convex-proof",
+      "relation": "proof",
+      "reason": "Pointwise upper and lower brackets are valid at every difference point, including boundary points.",
+      "source_lines": [
+        957,
+        957
+      ]
+    },
+    {
+      "from": "cor:convex-brackets",
+      "to": "step:difference-convex-proof",
+      "relation": "proof",
+      "reason": "Integral error and the pointwise bracket coefficient bound in (2.21).",
+      "source_lines": [
+        957,
+        963
+      ]
+    },
+    {
+      "from": "prop:identities",
+      "to": "step:difference-convex-proof",
+      "relation": "proof",
+      "reason": "The difference-measure identity (3.2) expresses the smooth count through nonnegative squared coefficients.",
+      "source_lines": [
+        954,
+        959
+      ]
+    },
+    {
+      "from": "cor:shell",
+      "to": "step:difference-convex-proof",
+      "relation": "proof",
+      "reason": "The squared shell estimate (2.8) controls the arithmetic factor.",
+      "source_lines": [
+        961,
+        963
+      ]
+    },
+    {
+      "from": "lem:dyadic",
+      "to": "step:difference-convex-proof",
+      "relation": "proof",
+      "reason": "Sum the decaying dyadic frequency terms before choosing the smoothing scale.",
+      "source_lines": [
+        965,
+        974
+      ]
+    },
+    {
+      "from": "step:difference-convex-proof",
+      "to": "thm:differences",
+      "relation": "proof",
+      "reason": "Establishes the convex clause (1.9).",
+      "source_lines": [
+        956,
+        979
+      ]
+    },
+    {
+      "from": "lem:brackets",
+      "to": "lem:arc-brackets",
+      "relation": "method",
+      "reason": "Adapt the proof of the pointwise bracket construction to the circle.",
+      "source_lines": [
+        990,
+        990
+      ]
+    },
+    {
+      "from": "eq:mollifier-decay",
+      "to": "lem:arc-brackets",
+      "relation": "method",
+      "reason": "Use the same periodization and integration-by-parts argument for a one-dimensional smooth mollifier.",
+      "source_lines": [
+        981,
+        994
+      ]
+    },
+    {
+      "from": "step:arc-indicator-coefficients",
+      "to": "lem:arc-brackets",
+      "relation": "proof",
+      "reason": "Combine the explicit arc coefficient with the mollifier multiplier.",
+      "source_lines": [
+        990,
+        994
+      ]
+    },
+    {
+      "from": "lem:arc-brackets",
+      "to": "step:difference-box-proof",
+      "relation": "proof",
+      "reason": "Products of arc brackets have factorized coefficients and a controlled integral error.",
+      "source_lines": [
+        998,
+        1006
+      ]
+    },
+    {
+      "from": "prop:identities",
+      "to": "step:difference-box-proof",
+      "relation": "proof",
+      "reason": "Use the difference-measure Fourier identity (3.2) in the product-bracket reduction.",
+      "source_lines": [
+        998,
+        1000
+      ]
+    },
+    {
+      "from": "prop:rectangular",
+      "to": "step:difference-box-proof",
+      "relation": "proof",
+      "reason": "Control the squared normalized arithmetic coefficients separately in each dyadic frequency block.",
+      "source_lines": [
+        1006,
+        1012
+      ]
+    },
+    {
+      "from": "step:cardinality-comparison",
+      "to": "step:difference-box-proof",
+      "relation": "proof",
+      "reason": "The comparison N_X much greater than X squared converts the unnormalized frequency moment to normalized coefficients.",
+      "source_lines": [
+        1006,
+        1008
+      ]
+    },
+    {
+      "from": "lem:dyadic",
+      "to": "step:difference-box-proof",
+      "relation": "proof",
+      "reason": "Control S_1 and its smoothing dependence in the one-variable block sums.",
+      "source_lines": [
+        1018,
+        1022
+      ]
+    },
+    {
+      "from": "step:difference-box-proof",
+      "to": "thm:differences",
+      "relation": "proof",
+      "reason": "Establishes the product-of-arcs clause (1.10).",
+      "source_lines": [
+        997,
+        1031
+      ]
+    },
+    {
+      "from": "step:cardinality-comparison",
+      "to": "eq:diagonal-removal",
+      "relation": "proof",
+      "reason": "Turn the exact error at most N_X inverse into O(X to the minus two).",
+      "source_lines": [
+        1037,
+        1039
+      ]
+    },
+    {
+      "from": "thm:differences",
+      "to": "cor:difference-shrinking",
+      "relation": "proof",
+      "reason": "Divide each discrepancy bound by the area at the stated shrinking scales.",
+      "source_lines": [
+        1057,
+        1065
+      ]
+    },
+    {
+      "from": "eq:diagonal-removal",
+      "to": "cor:difference-shrinking",
+      "relation": "proof",
+      "reason": "Control the change of normalization and removal of the equal-point pairs.",
+      "source_lines": [
+        1061,
+        1065
+      ]
+    },
+    {
+      "from": "prop:coordinate-separation",
+      "to": "lem:one-point",
+      "relation": "proof",
+      "reason": "Use the pairwise coordinate separation and the perimeter-to-width argument from the proof of Proposition 4.3.",
+      "source_lines": [
+        1082,
+        1084
+      ]
+    },
+    {
+      "from": "lem:one-point",
+      "to": "step:variance-convex-proof",
+      "relation": "proof",
+      "reason": "Handle the regime P below 2 X to the minus two by the exact one-point variance.",
+      "source_lines": [
+        1088,
+        1088
+      ]
+    },
+    {
+      "from": "step:cardinality-comparison",
+      "to": "step:variance-convex-proof",
+      "relation": "proof",
+      "reason": "Bound A/N_X by a constant times A X to the minus two in the one-point case.",
+      "source_lines": [
+        1088,
+        1088
+      ]
+    },
+    {
+      "from": "prop:identities",
+      "to": "step:variance-convex-proof",
+      "relation": "proof",
+      "reason": "Use the indicator variance identity (3.3) without smoothing.",
+      "source_lines": [
+        1070,
+        1094
+      ]
+    },
+    {
+      "from": "lem:convex-geometry",
+      "to": "step:variance-convex-proof",
+      "relation": "proof",
+      "reason": "Use the convex Fourier tail (2.19), pointwise coefficient bound (2.20), and bounded perimeter.",
+      "source_lines": [
+        1088,
+        1094
+      ]
+    },
+    {
+      "from": "step:normalized-coefficient-bound",
+      "to": "step:variance-convex-proof",
+      "relation": "proof",
+      "reason": "The estimate |a_X(k)| at most one lets the geometric Fourier tail control all frequencies above T.",
+      "source_lines": [
+        1088,
+        1090
+      ]
+    },
+    {
+      "from": "cor:shell",
+      "to": "step:variance-convex-proof",
+      "relation": "proof",
+      "reason": "Use the squared shell estimate (2.8) for frequencies below T.",
+      "source_lines": [
+        1092,
+        1094
+      ]
+    },
+    {
+      "from": "step:variance-convex-proof",
+      "to": "step:variance-disc-proof",
+      "relation": "proof",
+      "reason": "Specialize the already established convex bound to area pi r squared and perimeter 2 pi r.",
+      "source_lines": [
+        1106,
+        1106
+      ]
+    },
+    {
+      "from": "step:variance-convex-proof",
+      "to": "thm:variance",
+      "relation": "proof",
+      "reason": "Establishes the convex variance clause (1.12).",
+      "source_lines": [
+        1088,
+        1104
+      ]
+    },
+    {
+      "from": "step:variance-disc-proof",
+      "to": "thm:variance",
+      "relation": "proof",
+      "reason": "Establishes the disc variance clause (1.14).",
+      "source_lines": [
+        1106,
+        1106
+      ]
+    },
+    {
+      "from": "lem:one-point",
+      "to": "step:variance-box-proof",
+      "relation": "proof",
+      "reason": "Handle a side shorter than X to the minus two by the exact identity.",
+      "source_lines": [
+        1108,
+        1108
+      ]
+    },
+    {
+      "from": "step:cardinality-comparison",
+      "to": "step:variance-box-proof",
+      "relation": "proof",
+      "reason": "Normalize the rectangular frequency moment and bound V/N_X in the one-point case.",
+      "source_lines": [
+        1108,
+        1110
+      ]
+    },
+    {
+      "from": "step:arc-indicator-coefficients",
+      "to": "step:variance-box-proof",
+      "relation": "proof",
+      "reason": "Use the explicit unsmoothed arc indicator coefficients and their product factorization.",
+      "source_lines": [
+        1108,
+        1108
+      ]
+    },
+    {
+      "from": "prop:identities",
+      "to": "step:variance-box-proof",
+      "relation": "proof",
+      "reason": "Use the indicator variance identity (3.3).",
+      "source_lines": [
+        1108,
+        1110
+      ]
+    },
+    {
+      "from": "prop:rectangular",
+      "to": "step:variance-box-proof",
+      "relation": "proof",
+      "reason": "Control squared arithmetic coefficients on the product frequency blocks.",
+      "source_lines": [
+        1108,
+        1110
+      ]
+    },
+    {
+      "from": "step:difference-box-proof",
+      "to": "step:variance-box-proof",
+      "relation": "method",
+      "reason": "Reuse the dyadic blocks and factorized summation from the rectangle difference proof; no use is made of its final discrepancy bound.",
+      "source_lines": [
+        1108,
+        1114
+      ]
+    },
+    {
+      "from": "step:variance-box-proof",
+      "to": "thm:variance",
+      "relation": "proof",
+      "reason": "Establishes the rectangle variance clause (1.13).",
+      "source_lines": [
+        1108,
+        1114
+      ]
+    },
+    {
+      "from": "lem:one-point",
+      "to": "thm:variance",
+      "relation": "proof",
+      "reason": "Establishes the exact identity (1.15) and its stated sufficient conditions.",
+      "source_lines": [
+        1116,
+        1116
+      ]
+    },
+    {
+      "from": "thm:variance",
+      "to": "cor:variance-shrinking",
+      "relation": "proof",
+      "reason": "Apply the convex variance clause and Chebyshev's inequality after dividing by the square of the test-set area.",
+      "source_lines": [
+        1129,
+        1133
+      ]
+    },
+    {
+      "from": "thm:variance",
+      "to": "cor:simultaneous",
+      "relation": "proof",
+      "reason": "Apply the disc variance clause at a geometric grid of radii, then use a union bound and monotonicity.",
+      "source_lines": [
+        1152,
+        1164
+      ]
+    },
+    {
+      "from": "external:BRS-section-1-2",
+      "to": "eq:FX",
+      "relation": "method",
+      "reason": "Credit the empty-box construction; lines 225–229 verify the particular rectangle directly.",
+      "source_lines": [
+        225,
+        229
+      ]
+    },
+    {
+      "from": "thm:variance",
+      "to": "eq:distance-tail",
+      "relation": "proof",
+      "reason": "Apply Chebyshev's inequality with the disc variance clause (1.14) to centers of empty discs.",
+      "source_lines": [
+        1170,
+        1172
+      ]
+    },
+    {
+      "from": "cor:shrinking",
+      "to": "eq:distance-max",
+      "relation": "proof",
+      "reason": "Uniform equidistribution of discs at radius X to the minus one half plus kappa makes every such disc nonempty.",
+      "source_lines": [
+        1174,
+        1176
+      ]
+    },
+    {
+      "from": "eq:distance-tail",
+      "to": "step:distance-upper",
+      "relation": "proof",
+      "reason": "Bound the intermediate-radius tail in the layer-cake integral.",
+      "source_lines": [
+        1181,
+        1187
+      ]
+    },
+    {
+      "from": "eq:distance-max",
+      "to": "step:distance-upper",
+      "relation": "proof",
+      "reason": "Truncate the distance-tail integral uniformly at X to the minus one half plus kappa.",
+      "source_lines": [
+        1183,
+        1187
+      ]
+    },
+    {
+      "from": "eq:FX",
+      "to": "step:distance-lower",
+      "relation": "proof",
+      "reason": "Use the empty rectangle's central subrectangle to obtain measure of order X inverse at distance of order X to the minus one half.",
+      "source_lines": [
+        1193,
+        1197
+      ]
+    },
+    {
+      "from": "step:distance-upper",
+      "to": "thm:distance",
+      "relation": "proof",
+      "reason": "Establishes the upper half of (1.16) for all s greater than zero.",
+      "source_lines": [
+        1179,
+        1187
+      ]
+    },
+    {
+      "from": "step:distance-lower",
+      "to": "thm:distance",
+      "relation": "proof",
+      "reason": "Combines the packing and empty-rectangle lower bounds to select the exponent min(s,1+s/2).",
+      "source_lines": [
+        1189,
+        1197
+      ]
+    },
+    {
+      "from": "step:cardinality-upper",
+      "to": "step:distance-lower",
+      "relation": "proof",
+      "reason": "The packing argument uses the elementary upper bound N_X <= X^2, repeated at this location.",
+      "source_lines": [
+        1189,
+        1192
+      ]
+    }
+  ],
+  "bibliography": [
+    {
+      "bibkey": "BMV",
+      "citation_label": "BMV",
+      "authors": "J. T. Barton, H. L. Montgomery and J. D. Vaaler",
+      "title": "Note on a Diophantine inequality in several variables",
+      "as_cited": "Proc. Amer. Math. Soc. 129 (2001), 337-345",
+      "used_locators": [],
+      "role": "Context or comparison in the manuscript"
+    },
+    {
+      "bibkey": "Blomer",
+      "citation_label": "Bl",
+      "authors": "V. Blomer",
+      "title": "Pair correlation for modular inverses",
+      "as_cited": "preprint, 20 pp",
+      "used_locators": [],
+      "role": "Context or comparison in the manuscript"
+    },
+    {
+      "bibkey": "BC",
+      "citation_label": "BC",
+      "authors": "J. Beck and W. W. L. Chen",
+      "title": "Irregularities of distribution",
+      "as_cited": "Cambridge Tracts in Math. 89, Cambridge Univ. Press, Cambridge, 1987",
+      "used_locators": [],
+      "role": "Context or comparison in the manuscript"
+    },
+    {
+      "bibkey": "BRS",
+      "citation_label": "BRS",
+      "authors": "V. Blomer, M. S. Risager and I. E. Shparlinski",
+      "title": "Triple sums of Kloosterman sums and the discrepancy of modular inverses",
+      "as_cited": "J. Lond. Math. Soc. (2) 112 (2025), no. 3, e70291, 30 pp",
+      "used_locators": [
+        "Theorem 1.3",
+        "Section 2.1",
+        "Theorem 1.3; Section 2.1 for the small-power convention",
+        "Section 4.1",
+        "Section 3.1",
+        "Section 1.2"
+      ],
+      "role": "Proof input or explicit attribution"
+    },
+    {
+      "bibkey": "BCT",
+      "citation_label": "BCT",
+      "authors": "L. Brandolini, L. Colzani and G. Travaglini",
+      "title": "Average decay of Fourier transforms and integer points in polyhedra",
+      "as_cited": "Ark. Mat. 35 (1997), no. 2, 253-275",
+      "used_locators": [],
+      "role": "Context or comparison in the manuscript"
+    },
+    {
+      "bibkey": "CGT",
+      "citation_label": "CGT",
+      "authors": "L. Colzani, G. Gigante and G. Travaglini",
+      "title": "Trigonometric approximation and a general form of the Erdős-Turán inequality",
+      "as_cited": "Trans. Amer. Math. Soc. 363 (2011), no. 2, 1101-1123",
+      "used_locators": [],
+      "role": "Context or comparison in the manuscript"
+    },
+    {
+      "bibkey": "DI",
+      "citation_label": "DI",
+      "authors": "J.-M. Deshouillers and H. Iwaniec",
+      "title": "Kloosterman sums and Fourier coefficients of cusp forms",
+      "as_cited": "Invent. Math. 70 (1982/83), 219-288",
+      "used_locators": [],
+      "role": "Context or comparison in the manuscript"
+    },
+    {
+      "bibkey": "Dress",
+      "citation_label": "Dr",
+      "authors": "F. Dress",
+      "title": "Discrépance des suites de Farey",
+      "as_cited": "J. Théor. Nombres Bordeaux 11 (1999), no. 2, 345-367",
+      "used_locators": [],
+      "role": "Context or comparison in the manuscript"
+    },
+    {
+      "bibkey": "Good",
+      "citation_label": "Go",
+      "authors": "A. Good",
+      "title": "Local analysis of Selberg's trace formula",
+      "as_cited": "Lecture Notes in Math. 1040, Springer-Verlag, Berlin, 1983",
+      "used_locators": [],
+      "role": "Context or comparison in the manuscript"
+    },
+    {
+      "bibkey": "Grafakos",
+      "citation_label": "Gr",
+      "authors": "L. Grafakos",
+      "title": "Classical Fourier analysis",
+      "as_cited": "3rd ed., Grad. Texts in Math. 249, Springer, New York, 2014",
+      "used_locators": [
+        "Section 3.2.2",
+        "Section 3.1.2",
+        "Sections 3.3.2 and 3.3.3"
+      ],
+      "role": "Proof input or explicit attribution"
+    },
+    {
+      "bibkey": "Harman",
+      "citation_label": "Ha",
+      "authors": "G. Harman",
+      "title": "On the Erdős-Turán inequality for balls",
+      "as_cited": "Acta Arith. 85 (1998), 389-396",
+      "used_locators": [],
+      "role": "Context or comparison in the manuscript"
+    },
+    {
+      "bibkey": "HW",
+      "citation_label": "HW",
+      "authors": "G. H. Hardy and E. M. Wright",
+      "title": "An introduction to the theory of numbers",
+      "as_cited": "6th ed., Oxford Univ. Press, Oxford, 2008",
+      "used_locators": [
+        "Theorem 330"
+      ],
+      "role": "Proof input or explicit attribution"
+    },
+    {
+      "bibkey": "Humphries",
+      "citation_label": "Hu",
+      "authors": "P. Humphries",
+      "title": "Distributing points on the torus via modular inverses",
+      "as_cited": "Q. J. Math. 73 (2022), no. 1, 1-16",
+      "used_locators": [],
+      "role": "Context or comparison in the manuscript"
+    },
+    {
+      "bibkey": "IK",
+      "citation_label": "IK",
+      "authors": "H. Iwaniec and E. Kowalski",
+      "title": "Analytic number theory",
+      "as_cited": "Amer. Math. Soc. Colloq. Publ. 53, Amer. Math. Soc., Providence, RI, 2004",
+      "used_locators": [
+        "Equation (1.81)",
+        "Equation (3.2)"
+      ],
+      "role": "Proof input or explicit attribution"
+    },
+    {
+      "bibkey": "KS",
+      "citation_label": "KS",
+      "authors": "B. Kerr and I. E. Shparlinski",
+      "title": "On the distribution of values and zeros of polynomial systems over arbitrary sets",
+      "as_cited": "J. Number Theory 133 (2013), 2863-2873",
+      "used_locators": [],
+      "role": "Context or comparison in the manuscript"
+    },
+    {
+      "bibkey": "Kiral",
+      "citation_label": "Ki",
+      "authors": "E. M. Kıral",
+      "title": "Opposite-sign Kloosterman sum zeta function",
+      "as_cited": "Mathematika 62 (2016), 406-429",
+      "used_locators": [],
+      "role": "Context or comparison in the manuscript"
+    },
+    {
+      "bibkey": "KN",
+      "citation_label": "KN",
+      "authors": "L. Kuipers and H. Niederreiter",
+      "title": "Uniform distribution of sequences",
+      "as_cited": "Wiley-Interscience, New York-London-Sydney, 1974",
+      "used_locators": [],
+      "role": "Context or comparison in the manuscript"
+    },
+    {
+      "bibkey": "Kuznetsov",
+      "citation_label": "Ku",
+      "authors": "N. V. Kuznetsov",
+      "title": "The Petersson conjecture for cusp forms of weight zero and the Linnik conjecture. Sums of Kloosterman sums",
+      "as_cited": "Math. USSR-Sb. 39 (1981), 299-342",
+      "used_locators": [
+        "Paper cited without a numbered locator"
+      ],
+      "role": "Proof input or explicit attribution"
+    },
+    {
+      "bibkey": "LP",
+      "citation_label": "LP",
+      "authors": "M. L. Lapidus and E. P. J. Pearse",
+      "title": "A tube formula for the Koch snowflake curve, with applications to complex dimensions",
+      "as_cited": "J. London Math. Soc. (2) 74 (2006), no. 2, 397-414",
+      "used_locators": [
+        "Section 1"
+      ],
+      "role": "Proof input or explicit attribution"
+    },
+    {
+      "bibkey": "Niederreiter",
+      "citation_label": "Ni",
+      "authors": "H. Niederreiter",
+      "title": "The distribution of Farey points",
+      "as_cited": "Math. Ann. 201 (1973), 341-345",
+      "used_locators": [],
+      "role": "Context or comparison in the manuscript"
+    },
+    {
+      "bibkey": "Philipp",
+      "citation_label": "Ph",
+      "authors": "W. Philipp",
+      "title": "Empirical distribution functions and uniform distribution mod 1",
+      "as_cited": "in: Diophantine Approximation and its Applications (Washington, D.C., 1972), Academic Press, New York, 1973, 211-234",
+      "used_locators": [],
+      "role": "Context or comparison in the manuscript"
+    },
+    {
+      "bibkey": "Podkorytov",
+      "citation_label": "Po",
+      "authors": "A. N. Podkorytov",
+      "title": "The asymptotics of the Fourier transform of a convex curve",
+      "as_cited": "Vestnik Leningrad Univ. Math. 24 (1991), 57-65",
+      "used_locators": [],
+      "role": "Context or comparison in the manuscript"
+    },
+    {
+      "bibkey": "ST",
+      "citation_label": "ST",
+      "authors": "P. Sarnak and J. Tsimerman",
+      "title": "On Linnik and Selberg's conjecture about sums of Kloosterman sums",
+      "as_cited": "in: Algebra, Arithmetic, and Geometry: in Honor of Yu. I. Manin, Vol. II, Progr. Math. 270, Birkhäuser, Boston, 2009, 619-635",
+      "used_locators": [],
+      "role": "Context or comparison in the manuscript"
+    },
+    {
+      "bibkey": "Schmidt",
+      "citation_label": "Sc",
+      "authors": "W. M. Schmidt",
+      "title": "Irregularities of distribution. IX",
+      "as_cited": "Acta Arith. 27 (1975), 385-396",
+      "used_locators": [],
+      "role": "Context or comparison in the manuscript"
+    },
+    {
+      "bibkey": "Selberg38",
+      "citation_label": "Se38",
+      "authors": "A. Selberg",
+      "title": "Über die Fourierkoeffizienten elliptischer Modulformen negativer Dimension",
+      "as_cited": "C. R. Neuvième Congrès Math. Scandinaves, Helsingfors, 1938, 320-322",
+      "used_locators": [
+        "Paper cited without a numbered locator"
+      ],
+      "role": "Proof input or explicit attribution"
+    },
+    {
+      "bibkey": "Selberg77",
+      "citation_label": "Se",
+      "authors": "A. Selberg",
+      "title": "Equidistribution in discrete groups and the spectral theory of automorphic forms",
+      "as_cited": "unpublished lecture notes, Institute for Advanced Study, Princeton; available at https://publications.ias.edu/selberg/section/2491",
+      "used_locators": [],
+      "role": "Context or comparison in the manuscript"
+    },
+    {
+      "bibkey": "Shparlinski",
+      "citation_label": "Sh",
+      "authors": "I. E. Shparlinski",
+      "title": "Modular hyperbolas",
+      "as_cited": "Jpn. J. Math. 7 (2012), 235-294",
+      "used_locators": [],
+      "role": "Context or comparison in the manuscript"
+    },
+    {
+      "bibkey": "Travaglini",
+      "citation_label": "Tr",
+      "authors": "G. Travaglini",
+      "title": "Number theory, Fourier analysis and geometric discrepancy",
+      "as_cited": "London Math. Soc. Stud. Texts 81, Cambridge Univ. Press, Cambridge, 2014",
+      "used_locators": [],
+      "role": "Context or comparison in the manuscript"
+    },
+    {
+      "bibkey": "Xi",
+      "citation_label": "Xi",
+      "authors": "P. Xi",
+      "title": "An elementary proof of the Selberg identity for Kloosterman sums",
+      "as_cited": "preprint (2023), arXiv:2306.16929",
+      "used_locators": [
+        "Paper cited without a numbered locator"
+      ],
+      "role": "Proof input or explicit attribution"
+    }
+  ],
+  "comparisons": [
+    {
+      "id": "eq:brs-l1",
+      "kind": "auxiliary",
+      "title": "First moment on a frequency shell",
+      "short_title": "Comparison: shell first moment",
+      "summary": "The shell first moment satisfies $\\sum_{k\\in\\mathscr H(H)}|a_X(k)|\\ll_\\eta(HX)^\\eta(X^{-1}H^2+X^{-5/6}H^{4/3})$. The text cites BRS and also gives the alternative derivation by Cauchy–Schwarz from Corollary 2.4.",
+      "source": {
+        "lines": [
+          694,
+          698
+        ]
+      },
+      "section": "3",
+      "branch": "comparison",
+      "origin": "In-text supporting step",
+      "tex_label": "eq:brs-l1",
+      "equations": [
+        {
+          "label": "eq:brs-l1",
+          "number": "3.4"
+        }
+      ],
+      "references": [
+        {
+          "bibkey": "BRS",
+          "locator": "Theorem 1.1 and Remark 1.2",
+          "role": "First-moment estimate"
+        }
+      ],
+      "notes": [
+        "The subsequent BRS Section 5.1, Section 5.4 and equation (3.5) citations explain earlier discrepancy methods; they are not prerequisites of the new theorems."
+      ],
+      "certification_status": "pending",
+      "comparison_only": true
+    },
+    {
+      "id": "eq:l1-route",
+      "kind": "auxiliary",
+      "title": "Discrepancy obtained from the shell first moment",
+      "short_title": "Comparison: first-moment route",
+      "summary": "Pairing the maximal bracket coefficient with the shell first moment yields $D_X(E)\\ll_\\eta b+(X/\\delta)^\\eta(PX^{-1}\\delta^{-1}+PX^{-5/6}\\delta^{-1/3}+bX^{-1}\\delta^{-2}+bX^{-5/6}\\delta^{-4/3})$, where $b=P\\delta+\\delta^2$. At $\\delta=X^{-1/2}$, $X\\ge64$, this is $\\ll_\\varepsilon X^\\varepsilon(PX^{-1/2}+X^{-1})$.",
+      "source": {
+        "lines": [
+          700,
+          704
+        ]
+      },
+      "section": "3",
+      "branch": "comparison",
+      "origin": "In-text supporting step",
+      "tex_label": "eq:l1-route",
+      "equations": [
+        {
+          "label": "eq:l1-route",
+          "number": "3.5"
+        }
+      ],
+      "references": [],
+      "notes": [
+        "This is a comparison bound, not an intermediate premise of the sharper perimeter theorem.",
+        "The cited dyadic sums are outlined in Section 1; the later dyadic-summation lemma need not be made an input merely because it proves a reusable version."
+      ],
+      "certification_status": "pending",
+      "comparison_only": true
+    },
+    {
+      "id": "step:fixed-modulus-comparison",
+      "kind": "auxiliary",
+      "title": "Height variance obtained by averaging fixed-modulus standard deviations",
+      "short_title": "Comparison: fixed-modulus variance",
+      "summary": "Writing $\\mu_X=N_X^{-1}\\sum_{c\\le X}\\varphi(c)\\mu_c$, the triangle inequality and Humphries's disc variance bound give $\\mathcal V_X(B_r)^{1/2}\\ll_\\varepsilon rN_X^{-1}\\sum_{c\\le X}\\varphi(c)^{1/2}c^\\varepsilon\\ll_\\varepsilon rX^{-1/2+\\varepsilon}$. Thus $\\mathcal V_X(B_r)\\ll_\\varepsilon r^2X^{-1+2\\varepsilon}$.",
+      "source": {
+        "lines": [
+          712,
+          716
+        ]
+      },
+      "section": "3",
+      "branch": "comparison",
+      "origin": "In-text supporting step",
+      "tex_label": null,
+      "equations": [],
+      "references": [
+        {
+          "bibkey": "Humphries",
+          "locator": "Disc variance bound; paper cited without a numbered locator",
+          "role": "Fixed-modulus estimate"
+        }
+      ],
+      "notes": [
+        "This comparison is not used to prove Theorem 1.6; the following comparison with Theorem 1.6 is not a reverse proof dependency."
+      ],
+      "certification_status": "pending",
+      "comparison_only": true
+    }
+  ],
+  "discussion": [
+    {
+      "section": "6.1",
+      "title": "The exponent 2/3",
+      "source_lines": [
+        1204,
+        1206
+      ],
+      "status": "Open questions and method comparison",
+      "summary": "The two leading terms in the existing smoothing argument balance at exponent 2/3. Removing the sharp-cutoff term alone would not improve that balance. The text suggests additional geometric or arithmetic input and leaves the gap between the known convex-discrepancy lower and upper bounds unresolved.",
+      "internal_references": [
+        "thm:perimeter",
+        "prop:smoothing",
+        "lem:convex-geometry"
+      ],
+      "references": [
+        {
+          "bibkey": "BRS",
+          "locator": "Section 1.2"
+        },
+        {
+          "bibkey": "BRS",
+          "locator": "Theorem 1.4"
+        }
+      ],
+      "notes": [
+        "This is not an optimality theorem for all possible methods."
+      ]
+    },
+    {
+      "section": "6.2",
+      "title": "The mean-spacing scale",
+      "source_lines": [
+        1208,
+        1210
+      ],
+      "status": "Open limiting-statistics problem",
+      "summary": "The proved difference and variance bounds reach relative asymptotics above X inverse by a fixed power. At mean spacing they provide upper bounds but no limiting law. The text identifies pair correlation at mean spacing as a further question and cites the announced Blomer preprint as context.",
+      "internal_references": [
+        "thm:differences",
+        "thm:variance",
+        "cor:difference-shrinking",
+        "cor:variance-shrinking",
+        "lem:one-point"
+      ],
+      "references": [
+        {
+          "bibkey": "Blomer",
+          "locator": "Announced preprint; no theorem locator in v39"
+        }
+      ],
+      "notes": [
+        "The exact one-point identity concerns the smaller width scale below X to the minus two."
+      ]
+    },
+    {
+      "section": "6.3",
+      "title": "Other test sets",
+      "source_lines": [
+        1212,
+        1214
+      ],
+      "status": "Open extension and sketched consequence",
+      "summary": "The aspect-ratio-independent area bounds are established for products of coordinate arcs; their validity for arbitrary rotated rectangles is left open. The text also sketches a controlled-boundary extension of the difference method with error B X to the minus alpha plus epsilon and explicitly leaves its details and fractal-boundary local statistics to future work.",
+      "internal_references": [
+        "thm:differences",
+        "thm:variance",
+        "prop:rectangular",
+        "thm:boundary",
+        "cor:shell",
+        "lem:brackets",
+        "rem:koch"
+      ],
+      "references": [],
+      "notes": [
+        "The sketched controlled-boundary estimate is an unnumbered discussion claim, not an additional proved numbered result in this inventory."
+      ]
+    },
+    {
+      "section": "6.4",
+      "title": "The second moment of the distance",
+      "source_lines": [
+        1216,
+        1218
+      ],
+      "status": "Unresolved subpower factor and leading constant",
+      "summary": "For s=2, Theorem 1.7 gives lower order X to the minus two and upper order X to the minus two plus epsilon. The source leaves the remaining factor and constant undetermined and relates the issue to empty discs across the range from mean spacing to the empty-rectangle scale.",
+      "internal_references": [
+        "thm:distance",
+        "eq:distance-tail",
+        "eq:distance-max",
+        "eq:FX"
+      ],
+      "references": [
+        {
+          "bibkey": "BRS",
+          "locator": "Section 1.2"
+        }
+      ],
+      "notes": [
+        "The logarithm appearing in an upper-bound integration does not establish an exact logarithmic order."
+      ]
+    }
+  ],
+  "literature_notes": [
+    "The proof graph starts from the frequency moment as packaged in BRS Theorem 1.3. The spectral ancestry of that result, including Kuznetsov and the Deshouillers–Iwaniec large sieve, is not expanded into additional premises for this paper.",
+    "Selberg38 gives the historical attribution for Selberg's identity; Kuznetsov and Xi are the proof references cited in v39. The graph uses Xi as the explicit literature input and keeps the other references on the identity record. BRS Section 4.1 is credited for the general-frequency reduction. The empty-box construction is credited to BRS Section 1.2, while the particular rectangle used in the distance proof is verified directly in v39.",
+    "BRS's earlier discrepancy bounds, first moments, dyadic packing method and general lower bounds are used for comparisons. The BRS Section 3.1 definition of well-shapedness is an input, but the nearby earlier well-shaped discrepancy estimate is not. Humphries's fixed-modulus variance enters a comparison calculation in Section 3.3, not the proof of Theorem 1.6.",
+    "The angular Fourier-decay results of Podkorytov and Brandolini–Colzani–Travaglini, the geometric-discrepancy literature including Colzani–Gigante–Travaglini, and the earlier Farey, discrepancy and Kloosterman results provide context. The manuscript proves its own translation, tube and bracket estimates. The announced Blomer pair-correlation preprint is contextual and is described here only as v39 describes it; it is not a proof input."
+  ],
+  "overview": {
+    "nodes": [
+      {
+        "id": "ov:arithmetic",
+        "kind": "overview",
+        "title": "Arithmetic moments",
+        "short_title": "Theorem 2.1; Corollary 2.2\nProposition 2.3; Corollary 2.4",
+        "members": [
+          "thm:brs-input",
+          "cor:brs-cumulative",
+          "prop:rectangular",
+          "cor:shell"
+        ],
+        "certification_status": "pending"
+      },
+      {
+        "id": "ov:geometry",
+        "kind": "overview",
+        "title": "Geometry and pointwise brackets",
+        "short_title": "Lemmas 2.5–2.7\nCorollary 2.8; Remark 2.9",
+        "members": [
+          "lem:translation",
+          "lem:brackets",
+          "lem:convex-geometry",
+          "cor:convex-brackets",
+          "rem:tube-to-translation"
+        ],
+        "certification_status": "pending"
+      },
+      {
+        "id": "ov:identities",
+        "kind": "overview",
+        "title": "Counting and Fourier identities",
+        "short_title": "Proposition 3.1; Remark 3.2",
+        "members": [
+          "prop:identities",
+          "rem:overlap"
+        ],
+        "certification_status": "pending"
+      },
+      {
+        "id": "ov:summation",
+        "kind": "overview",
+        "title": "Dyadic summation",
+        "short_title": "Lemma 4.1",
+        "members": [
+          "lem:dyadic"
+        ],
+        "certification_status": "pending"
+      },
+      {
+        "id": "ov:smoothing",
+        "kind": "overview",
+        "title": "Convex smoothing",
+        "short_title": "Proposition 4.2",
+        "members": [
+          "prop:smoothing"
+        ],
+        "certification_status": "pending"
+      },
+      {
+        "id": "ov:convex",
+        "kind": "overview",
+        "title": "Convex discrepancy and shrinking sets",
+        "short_title": "Theorem 1.1\nCorollaries 1.2–1.3",
+        "members": [
+          "thm:perimeter",
+          "cor:isotropic",
+          "cor:shrinking"
+        ],
+        "certification_status": "pending"
+      },
+      {
+        "id": "ov:small",
+        "kind": "overview",
+        "title": "Coordinate separation and small sets",
+        "short_title": "Proposition 4.3; Corollary 4.4\nRemark 4.5",
+        "members": [
+          "prop:coordinate-separation",
+          "cor:small-perimeter-sharp",
+          "rem:positive-area"
+        ],
+        "certification_status": "pending"
+      },
+      {
+        "id": "ov:boundary",
+        "kind": "overview",
+        "title": "Controlled boundary neighborhoods",
+        "short_title": "Theorem 1.4; Corollary 4.6\nRemarks 4.7–4.8",
+        "members": [
+          "thm:boundary",
+          "cor:well-shaped",
+          "rem:koch",
+          "rem:topological-boundary"
+        ],
+        "certification_status": "pending"
+      },
+      {
+        "id": "ov:differences",
+        "kind": "overview",
+        "title": "Ordered differences",
+        "short_title": "Theorem 1.5\nLemma 5.1; Corollary 5.2",
+        "members": [
+          "thm:differences",
+          "lem:arc-brackets",
+          "cor:difference-shrinking"
+        ],
+        "certification_status": "pending"
+      },
+      {
+        "id": "ov:variance",
+        "kind": "overview",
+        "title": "Variance and exceptional sets",
+        "short_title": "Theorem 1.6; Lemma 5.3\nCorollaries 5.4–5.5",
+        "members": [
+          "thm:variance",
+          "lem:one-point",
+          "cor:variance-shrinking",
+          "cor:simultaneous"
+        ],
+        "certification_status": "pending"
+      },
+      {
+        "id": "ov:empty",
+        "kind": "overview",
+        "title": "Empty rectangle and point counting",
+        "short_title": "Equation (1.6); elementary count",
+        "members": [
+          "eq:FX",
+          "step:cardinality-upper"
+        ],
+        "certification_status": "pending"
+      },
+      {
+        "id": "ov:distance",
+        "kind": "overview",
+        "title": "Distance moments",
+        "short_title": "Theorem 1.7",
+        "members": [
+          "thm:distance"
+        ],
+        "certification_status": "pending"
+      }
+    ],
+    "edges": [
+      {
+        "from": "ov:arithmetic",
+        "to": "ov:smoothing",
+        "relation": "proof",
+        "reason": "Arithmetic shell norms enter the convex smoothing bound."
+      },
+      {
+        "from": "ov:geometry",
+        "to": "ov:smoothing",
+        "relation": "proof",
+        "reason": "Convex brackets supply the geometric shell norms and integral error."
+      },
+      {
+        "from": "ov:identities",
+        "to": "ov:smoothing",
+        "relation": "proof",
+        "reason": "The counting identity evaluates the smooth brackets."
+      },
+      {
+        "from": "ov:smoothing",
+        "to": "ov:convex",
+        "relation": "proof",
+        "reason": "Optimize the smoothing scale; then take a supremum or divide by the scaled area."
+      },
+      {
+        "from": "ov:arithmetic",
+        "to": "ov:boundary",
+        "relation": "proof",
+        "reason": "Arithmetic shells enter the separate general-boundary calculation."
+      },
+      {
+        "from": "ov:geometry",
+        "to": "ov:boundary",
+        "relation": "proof",
+        "reason": "General brackets and translation control give boundary-dependent Fourier estimates."
+      },
+      {
+        "from": "ov:identities",
+        "to": "ov:boundary",
+        "relation": "proof",
+        "reason": "The counting identity is used in the general bracket reduction."
+      },
+      {
+        "from": "ov:summation",
+        "to": "ov:smoothing",
+        "relation": "proof",
+        "reason": "Dyadic sums control the shell contributions in the convex smoothing bound."
+      },
+      {
+        "from": "ov:summation",
+        "to": "ov:boundary",
+        "relation": "proof",
+        "reason": "Use the dyadic lemma and its explicit constants; derive the near-zero exponent estimate separately."
+      },
+      {
+        "from": "ov:arithmetic",
+        "to": "ov:differences",
+        "relation": "proof",
+        "reason": "Shell and rectangular moments control squared coefficients in the difference measure."
+      },
+      {
+        "from": "ov:geometry",
+        "to": "ov:differences",
+        "relation": "proof",
+        "reason": "Convex brackets and the one-dimensional adaptation give pointwise enclosure."
+      },
+      {
+        "from": "ov:identities",
+        "to": "ov:differences",
+        "relation": "proof",
+        "reason": "The difference Fourier identity supplies the nonnegative squared coefficients."
+      },
+      {
+        "from": "ov:summation",
+        "to": "ov:differences",
+        "relation": "proof",
+        "reason": "The dyadic-summation lemma controls the smoothing sums."
+      },
+      {
+        "from": "ov:arithmetic",
+        "to": "ov:variance",
+        "relation": "proof",
+        "reason": "Squared shell and rectangular moments enter the variance estimates."
+      },
+      {
+        "from": "ov:geometry",
+        "to": "ov:variance",
+        "relation": "proof",
+        "reason": "Convex Fourier tails and pointwise coefficients are applied without smoothing."
+      },
+      {
+        "from": "ov:identities",
+        "to": "ov:variance",
+        "relation": "proof",
+        "reason": "The indicator variance identity expresses the translation variance."
+      },
+      {
+        "from": "ov:small",
+        "to": "ov:variance",
+        "relation": "proof",
+        "reason": "Coordinate separation supplies the sufficient conditions for the exact one-point identity."
+      },
+      {
+        "from": "ov:variance",
+        "to": "ov:distance",
+        "relation": "proof",
+        "reason": "The disc variance yields an empty-disc tail estimate."
+      },
+      {
+        "from": "ov:convex",
+        "to": "ov:distance",
+        "relation": "proof",
+        "reason": "Shrinking-set equidistribution gives a uniform cutoff for distance."
+      },
+      {
+        "from": "ov:empty",
+        "to": "ov:distance",
+        "relation": "proof",
+        "reason": "The elementary count and empty rectangle supply the two moment lower bounds."
+      }
+    ],
+    "rank_groups": [
+      {
+        "rank": "same",
+        "nodes": [
+          "ov:arithmetic",
+          "ov:geometry",
+          "ov:identities"
+        ]
+      },
+      {
+        "rank": "sink",
+        "nodes": [
+          "ov:boundary",
+          "ov:differences",
+          "ov:distance"
+        ]
+      }
+    ]
+  },
+  "numbered_view": {
+    "trusted_source_groups": [
+      {
+        "bibkey": "BRS",
+        "title": "Blomer, Risager and Shparlinski",
+        "short_title": "Blomer–Risager–Shparlinski\nFrequency second moment\nWell-shaped-set definition"
+      },
+      {
+        "bibkey": "Xi",
+        "title": "Xi",
+        "short_title": "Xi\nSelberg identity"
+      },
+      {
+        "bibkey": "IK",
+        "title": "Iwaniec and Kowalski",
+        "short_title": "Iwaniec–Kowalski\nDivisor and Ramanujan bounds"
+      },
+      {
+        "bibkey": "HW",
+        "title": "Hardy and Wright",
+        "short_title": "Hardy–Wright\nSummatory totient estimate"
+      },
+      {
+        "bibkey": "Grafakos",
+        "title": "Grafakos",
+        "short_title": "Grafakos\nParseval, Fourier inversion\nand convolution"
+      },
+      {
+        "bibkey": "LP",
+        "title": "Lapidus and Pearse",
+        "short_title": "Lapidus–Pearse\nKoch construction and dimension"
+      }
+    ]
+  }
+}
